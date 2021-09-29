@@ -1,25 +1,34 @@
-<!DOCTYPE HTML>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-    </head>
-    <body>
-        <h1>アプリ名</h1>
-        <form action="/posts" method="POST">
-            @csrf
-            <div class="title">
-                <h2>タイトル</h2>
-                <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
-                <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">新規投稿</div>
+
+                <div class="card-body">
+                    <form action="/posts" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">タイトル</label>
+                            <input type="text" class="form-control" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
+                            <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">本文</label>
+                            <textarea class="form-control" name="post[body]" placeholder="今日も1日お疲れさまでした。">{{ old('post.body') }}</textarea>
+                            <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                        </div>
+                        
+                        <input type="submit" value="保存">
+                        
+                        <a href="/">戻る</a>
+                    </form>
+                </div>
             </div>
-            <div class="body">
-                <h2>内容</h2>
-                <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。">{{ old('post.body') }}</textarea>
-                <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
-            </div>
-            <input type="submit" value="保存"/>
-        </form>
-        <div class="back">[<a href="/">戻る</a>]</div>
-    </body>
-</html>
+        </div>
+    </div>
+</div>
+@endsection
