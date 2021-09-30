@@ -23,6 +23,29 @@
                     <a href="/" class="card-link">戻る</a>
                 </div>
             </div>
+            
+            <div class="card">
+                <div class="card-header">コメントを投稿</div>
+
+                <div class="card-body">
+                    <form action="/posts" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <textarea class="form-control" name="post[body]" placeholder="This is Good!">{{ old('post.body') }}</textarea>
+                            <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                        </div>
+                        <input type="submit" value="投稿">
+                    </form>
+                </div>
+            </div>
+            @foreach ($post->comments as $comment)
+            <div class="card">
+                <div class="card-body">
+                    <div class='card-text' style='font-weight:  bold;'>投稿者：{{ $comment->user->name }}</p></div>
+                    <div class='card-text'>{{ $comment->comment }}</p></div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </div>

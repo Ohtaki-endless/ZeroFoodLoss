@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Comment;
+use App\User;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -14,9 +16,10 @@ class PostController extends Controller
     } 
     
     // 投稿詳細画面
-    public function show(Post $post)
+    public function show(Post $post, Comment $comment, User $user)
     {
-        return view('show')->with(['post' => $post]);
+        $post->load('comments.user');
+        return view('show')->with(["post" => $post]);
     }
     
     // 新規投稿画面表示

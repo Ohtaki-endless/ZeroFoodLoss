@@ -9,6 +9,10 @@ class Post extends Model
 {
     use SoftDeletes;
     
+    public function comments(){
+        return $this->hasMany(\App\Comment::class,'post_id', 'id');
+    }
+    
     protected $fillable = [
         'title',
         'body',
