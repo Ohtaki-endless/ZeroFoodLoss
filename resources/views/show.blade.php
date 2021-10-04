@@ -11,6 +11,27 @@
                 </div>
                 
                 <div class="card-body">
+                    @if($like)
+                    	<a href="/unlikes/{{ $post->id }}" class="btn btn-danger btn-sm">
+                    		いいね
+                    		<!-- いいねの数を表示 -->
+                    		<span class="badge">
+                    			{{ $post->likes->count() }}
+                    		</span>
+                    	</a>
+                    @else
+                    <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
+                    	<a href="/likes/{{ $post->id }}" class="btn btn-secondary btn-sm">
+                    		いいね
+                    		<!-- いいねの数を表示 -->
+                    		<span class="badge">
+                    			{{ $post->likes->count() }}
+                    		</span>
+                    	</a>
+                    @endif
+                </div>
+                
+                <div class="card-body">
                     <a href="/posts/{{ $post->id }}/edit" class="card-link">編集</a>
                     <form action="/posts/{{ $post->id }}" id="post_delete" method="post" style="display:inline">
                         @csrf
