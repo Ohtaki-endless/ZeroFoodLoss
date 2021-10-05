@@ -6,6 +6,7 @@ use App\Post;
 use App\Comment;
 use App\User;
 use App\Like;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
@@ -33,8 +34,19 @@ class PostController extends Controller
     // 新規投稿実行処理
     public function store(Post $post, PostRequest $request)
     {
+        $post = new Post;
         $input = $request['post'];
-        $post->fill($input)->save();
+        
+        if($request->file('image')){
+            // バケットへアップロード
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            // アップロードした画像のフルパスを取得
+            $post->image_path = Storage::disk('s3')->url($path);
+        }
+        
+        $post->fill($input);
+        $post->save();
         return redirect('/posts/' . $post->id);
     }
     

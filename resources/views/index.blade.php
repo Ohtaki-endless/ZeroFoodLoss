@@ -12,6 +12,7 @@
                 <div class="card-body">
                     <h5 class='card-title'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h5>
                     <div class='card-text'>{{ $post->body }}</p></div>
+                    <div class='card-text'><img src="{{ $post->image_path }}"></div>
                 </div>
             </div>
             @endforeach

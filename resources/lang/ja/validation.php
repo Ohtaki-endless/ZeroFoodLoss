@@ -149,6 +149,9 @@ return [
         'email' => 'メールアドレス',
 	'password' => 'パスワード',
 	'comment.comment' => 'コメント',
+	'post.title' => 'タイトル',
+	'post.body' => '本文',
+	'post.image' => '画像',
     ],
  
 ];

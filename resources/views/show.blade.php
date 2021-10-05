@@ -8,6 +8,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text">{{ $post->body }}</p>
+                    <div class='card-text'><img src="{{ $post->image_path }}"></div>
                 </div>
                 
                 <div class="card-body">
