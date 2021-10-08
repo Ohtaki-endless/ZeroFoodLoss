@@ -30,3 +30,7 @@ Route::delete('/comments/{comment}', 'CommentController@delete');
 // いいね機能
 Route::get('/likes/{post}', 'LikeController@like')->middleware('auth');
 Route::get('/unlikes/{post}', 'LikeController@unlike')->middleware('auth');
+
+// Google Login
+Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
+Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');

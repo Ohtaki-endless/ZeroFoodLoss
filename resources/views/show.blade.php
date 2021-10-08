@@ -21,7 +21,6 @@
                     		</span>
                     	</a>
                     @else
-                    <!-- まだユーザーが「いいね」をしていなければ、「いいね」ボタンを表示 -->
                     	<a href="/likes/{{ $post->id }}" class="btn btn-secondary btn-sm">
                     		いいね
                     		<!-- いいねの数を表示 -->
@@ -55,7 +54,6 @@
                             <textarea class="form-control" name="comment[comment]" placeholder="This is Good!">{{ old('comment.body') }}</textarea>
                             <p class="comment__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
                         </div>
-                        <input type="hidden" name="comment[user_id]" value="{{ Auth::id() }}">
                         <input type="hidden" name="comment[post_id]" value="{{ $post->id }}">
                         <input type="submit" value="投稿">
                     </form>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
-use App\Comment;
 use App\Like;
 use Illuminate\Support\Facades\Auth;
 

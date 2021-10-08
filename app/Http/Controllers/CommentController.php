@@ -11,7 +11,10 @@ class CommentController extends Controller
 {
     public function store(Comment $comment, CommentRequest $request)
     {
+        dd($post);
         $input = $request['comment'];
+        $input += ['user_id' => $request->user()->id];
+        // $input += ['post_id' => $request->post()->id]; なぜ取得できない？
         $comment->fill($input)->save();
         return redirect('/posts/' . $input['post_id']);
     }

@@ -41,7 +41,7 @@ class PostController extends Controller
             // バケットへアップロード
             $image = $request->file('image');
             $path = Storage::disk('s3')->putFile('/', $image, 'public');
-            // アップロードした画像のフルパスを取得
+            // アップロードした画像のパスを取得
             $post->image_path = Storage::disk('s3')->url($path);
         }
         

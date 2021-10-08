@@ -65,6 +65,16 @@
                             </div>
                         </div>
                     </form>
+                    
+                    <!--google login-->
+                    <div class="form-group row mt-2">
+                        <div class="col-md-8 offset-md-4">
+                            <a class="btn btn-google"  href="login/google">
+                                <span class ="fab fa-google"></span> Googleでログイン
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
