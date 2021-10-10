@@ -9,12 +9,11 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Comment $comment, CommentRequest $request)
+    public function store(Comment $comment, CommentRequest $request, Post $post)
     {
-        dd($post);
         $input = $request['comment'];
         $input += ['user_id' => $request->user()->id];
-        // $input += ['post_id' => $request->post()->id]; なぜ取得できない？
+        $input += ['post_id' => $post->id];
         $comment->fill($input)->save();
         return redirect('/posts/' . $input['post_id']);
     }

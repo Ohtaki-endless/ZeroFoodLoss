@@ -24,7 +24,7 @@ Route::post('/posts', 'PostController@store');
 Route::delete('/posts/{post}', 'PostController@delete');
 
 // コメント機能
-Route::post('/comments', 'CommentController@store')->middleware('auth');
+Route::post('/{post}/comments', 'CommentController@store')->middleware('auth');
 Route::delete('/comments/{comment}', 'CommentController@delete');
 
 // いいね機能

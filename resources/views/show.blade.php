@@ -48,13 +48,12 @@
             <div class="card">
                 <div class="card-header">コメントを投稿</div>
                 <div class="card-body">
-                    <form action="/comments" method="POST">
+                    <form action="/{{ $post->id }}/comments" method="POST">
                         @csrf
                         <div class="mb-3">
                             <textarea class="form-control" name="comment[comment]" placeholder="This is Good!">{{ old('comment.body') }}</textarea>
                             <p class="comment__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
                         </div>
-                        <input type="hidden" name="comment[post_id]" value="{{ $post->id }}">
                         <input type="submit" value="投稿">
                     </form>
                 </div>
