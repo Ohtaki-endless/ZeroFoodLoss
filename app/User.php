@@ -10,12 +10,12 @@ class User extends Authenticatable
 {
     use Notifiable;
     
-    public function likes(){
-        return $this->hasMany('App\Like');
-    }
-    
     public function comments(){
         return $this->hasMany('App\Comment');
+    }
+    
+    public function likes(){
+        return $this->belongsToMany('App\Post')->withTimestamps();
     }
     
     protected $fillable = [

@@ -12,23 +12,29 @@
                 </div>
                 
                 <div class="card-body">
-                    @if($like)
-                    	<a href="/unlikes/{{ $post->id }}" class="btn btn-danger btn-sm">
+                    @if($post->users()->where('user_id', Auth::id())->exists())
+                    	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm">
                     		いいね
                     		<!-- いいねの数を表示 -->
                     		<span class="badge">
-                    			{{ $post->likes->count() }}
+                    			{{ $post->users()->count() }}
                     		</span>
                     	</a>
                     @else
-                    	<a href="/likes/{{ $post->id }}" class="btn btn-secondary btn-sm">
+                    	<a href="/{{ $post->id }}/likes" class="btn btn-secondary btn-sm">
                     		いいね
                     		<!-- いいねの数を表示 -->
                     		<span class="badge">
-                    			{{ $post->likes->count() }}
+                    			{{ $post->users()->count() }}
                     		</span>
                     	</a>
                     @endif
+                </div>
+                
+                <div class="card-body">
+                    <a href="/{{ $post->id }}/likes/users" class="btn btn-sm">
+                    	いいねしたユーザー
+                    </a>
                 </div>
                 
                 <div class="card-body">
@@ -64,7 +70,7 @@
                 <div class="card-body">
                     <div class='card-text' style='font-weight:  bold;'>投稿者：{{ $comment->user->name }}</p></div>
                     <div class='card-text'>{{ $comment->comment }}</p></div>
-                    <form action="/comments/{{ $comment->id }}" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
+                    <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
                         @csrf
                         @method('DELETE')
                         <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除">

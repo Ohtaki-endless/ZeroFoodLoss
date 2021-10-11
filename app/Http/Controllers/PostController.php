@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Comment;
 use App\User;
-use App\Like;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostRequest;
 
@@ -21,8 +20,7 @@ class PostController extends Controller
     public function show(Post $post, Comment $comment)
     {
         $post->load('comments.user');
-        $like = Like::where('post_id', $post->id)->where('user_id', auth()->user()->id)->first();
-        return view('show', compact('post', 'like'));
+        return view('show', compact('post'));
     }
     
     // 新規投稿画面表示

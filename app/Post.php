@@ -13,8 +13,8 @@ class Post extends Model
         return $this->hasMany('App\Comment');
     }
     
-    public function likes(){
-        return $this->hasMany('App\Like');
+    public function users(){
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
     
     protected $fillable = [

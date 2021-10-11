@@ -25,11 +25,13 @@ Route::delete('/posts/{post}', 'PostController@delete');
 
 // コメント機能
 Route::post('/{post}/comments', 'CommentController@store')->middleware('auth');
-Route::delete('/comments/{comment}', 'CommentController@delete');
+Route::delete('/{comment}/comments', 'CommentController@delete');
 
 // いいね機能
-Route::get('/likes/{post}', 'LikeController@like')->middleware('auth');
-Route::get('/unlikes/{post}', 'LikeController@unlike')->middleware('auth');
+Route::get('/{post}/likes', 'LikeController@like')->middleware('auth');
+Route::get('/{post}/unlikes', 'LikeController@unlike')->middleware('auth');
+
+Route::get('/{post}/likes/users', 'LikeController@likeusers');
 
 // Google Login
 Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
