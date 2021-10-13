@@ -14,14 +14,18 @@
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-// 投稿一覧、新規投稿、編集、投稿詳細、削除
+// 管理者のみアクセス可(新規投稿、編集。削除)
+Route::middleware(['auth','can:isAdmin'])->group(function(){
+        Route::get('/posts/create', 'PostController@create');
+        Route::get('/posts/{post}/edit', 'PostController@edit');
+        Route::put('/posts/{post}', 'PostController@update');
+        Route::delete('/posts/{post}', 'PostController@delete');
+        Route::post('/posts', 'PostController@store');
+    });
+    
+// 投稿一覧、投稿詳細
 Route::get('/', 'PostController@index');
-Route::get('/posts/create', 'PostController@create');
-Route::get('/posts/{post}/edit', 'PostController@edit');
 Route::get('/posts/{post}', 'PostController@show')->middleware('auth');
-Route::put('/posts/{post}', 'PostController@update');
-Route::post('/posts', 'PostController@store');
-Route::delete('/posts/{post}', 'PostController@delete');
 
 // コメント機能
 Route::post('/{post}/comments', 'CommentController@store')->middleware('auth');
@@ -30,7 +34,6 @@ Route::delete('/{comment}/comments', 'CommentController@delete');
 // いいね機能
 Route::get('/{post}/likes', 'LikeController@like')->middleware('auth');
 Route::get('/{post}/unlikes', 'LikeController@unlike')->middleware('auth');
-
 Route::get('/{post}/likes/users', 'LikeController@likeusers');
 
 // Google Login

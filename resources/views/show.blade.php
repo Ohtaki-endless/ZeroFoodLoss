@@ -37,6 +37,7 @@
                     </a>
                 </div>
                 
+                @can('isAdmin')
                 <div class="card-body">
                     <a href="/posts/{{ $post->id }}/edit" class="card-link">編集</a>
                     <form action="/posts/{{ $post->id }}" id="post_delete" method="post" style="display:inline">
@@ -45,6 +46,7 @@
                         <input type="button" onclick="deletePost();" value="削除">
                     </form>
                 </div>
+                @endcan
                     
                 <div class="card-body">
                     <a href="/" class="card-link">戻る</a>
@@ -57,7 +59,7 @@
                     <form action="/{{ $post->id }}/comments" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <textarea class="form-control" name="comment[comment]" placeholder="This is Good!">{{ old('comment.body') }}</textarea>
+                            <textarea class="form-control" name="comment[comment]" placeholder="コメントを入力">{{ old('comment.body') }}</textarea>
                             <p class="comment__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
                         </div>
                         <input type="submit" value="投稿">

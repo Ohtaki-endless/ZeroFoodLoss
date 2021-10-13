@@ -14,7 +14,7 @@ class PostUserTable extends Migration
     public function up()
     {
         Schema::create('post_user', function (Blueprint $table) {
-            $table->Increments('id');
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('post_id');
             $table->timestamps();
@@ -22,7 +22,6 @@ class PostUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
-            // ユーザーが何度も同じ投稿をいいねすることがないように設定
             $table->unique(['user_id', 'post_id']);
         });
     }
