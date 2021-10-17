@@ -39,3 +39,6 @@ Route::get('/{post}/likes/users', 'LikeController@likeusers');
 // Google Login
 Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
+
+// カート機能
+Route::post('/posts/{post}/addCart','ProductController@addCart')->name('addcart.post');

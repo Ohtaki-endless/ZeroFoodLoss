@@ -32,10 +32,26 @@
                 </div>
                 
                 <div class="card-body">
-                    <a href="/{{ $post->id }}/likes/users" class="btn btn-sm">
-                    	いいねしたユーザー
+                    <a href="/{{ $post->id }}/likes/users" class="btn btn-secondary btn-sm">
+                    	いいねしたユーザー一覧
                     </a>
                 </div>
+                
+                
+                
+                
+                {{ Form::open(['url' => '/posts/{post}/addCart']) }}    
+
+                    {{--session保存用 --}}
+                    {{ Form::hidden('products_id', $post->id) }}
+                    {{ Form::hidden('users_id', Auth::id()) }}
+                    <input type="number" name="product_quantity" class="form-control" id="prodqty" pattern="[1-9][0-9]*" min="1" required autofocus>
+                    {!! Form::submit('カートへ追加', ['class' => 'btn btn-primary']) !!}
+                    
+                {!! Form::close() !!}
+                
+                
+                
                 
                 @can('isAdmin')
                 <div class="card-body">
