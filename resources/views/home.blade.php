@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="/" class="card-link">投稿一覧へ</a>
+                    <a href="/" class="card-link">商品一覧へ</a>
                 </div>
             </div>
         </div>

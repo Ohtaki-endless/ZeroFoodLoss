@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title', 50);
             $table->string('body', 200);
+            $table->integer('price')->unsigned()->index();
             $table->string('image_path')->nullable();
             $table->timestamps();
             $table->softDeletes();

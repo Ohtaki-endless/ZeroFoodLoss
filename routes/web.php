@@ -23,6 +23,7 @@ Route::middleware(['auth','can:isAdmin'])->group(function(){
         Route::post('/posts', 'PostController@store');
     });
     
+Route::get('/posts/cartindex','ProductController@Cartindex');
 // 投稿一覧、投稿詳細
 Route::get('/', 'PostController@index');
 Route::get('/posts/{post}', 'PostController@show')->middleware('auth');
@@ -41,4 +42,4 @@ Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 // カート機能
-Route::post('/posts/{post}/addCart','ProductController@addCart')->name('addcart.post');
+Route::post('/posts/{post}/addCart','ProductController@addCart');

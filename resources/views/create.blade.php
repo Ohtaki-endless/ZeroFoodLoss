@@ -11,19 +11,25 @@
                     <form action="/posts" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">タイトル</label>
-                            <input type="text" class="form-control" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
+                            <label for="exampleFormControlInput1" class="form-label">商品名</label>
+                            <input type="text" class="form-control" name="post[title]" placeholder="商品名" value="{{ old('post.title') }}"/>
                             <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">本文</label>
-                            <textarea class="form-control" name="post[body]" placeholder="今日も1日お疲れさまでした。">{{ old('post.body') }}</textarea>
+                            <label for="exampleFormControlTextarea1" class="form-label">商品説明</label>
+                            <textarea class="form-control" name="post[body]" placeholder="商品説明入力...">{{ old('post.body') }}</textarea>
                             <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                         </div>
                         
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">画像</label>
+                            <label for="exampleFormControlInput1" class="form-label">値段</label>
+                            <input type="number" class="form-control" name="post[price]" placeholder="値段" value="{{ old('post.price') }}"/>
+                            <p class="title__error" style="color:red">{{ $errors->first('post.price') }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">商品画像</label>
                             <input type="file" name="image">
                             <p class="body__error" style="color:red">{{ $errors->first('post.image') }}</p>
                         </div>    

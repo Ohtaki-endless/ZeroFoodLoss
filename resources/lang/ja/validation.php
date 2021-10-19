@@ -149,9 +149,10 @@ return [
         'email' => 'メールアドレス',
 	'password' => 'パスワード',
 	'comment.comment' => 'コメント',
-	'post.title' => 'タイトル',
-	'post.body' => '本文',
-	'post.image' => '画像',
+	'post.title' => '商品名',
+	'post.body' => '商品説明',
+	'post.price' => '値段',
+	'post.image' => '商品画像',
     ],
  
 ];

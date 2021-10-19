@@ -5,9 +5,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                
+                <!--管理者のみ表示-->
+                @can('isAdmin')
                 <div class="card-body">
-                    <h5 class="card-title">{{ $post->title }}</h5>
+                    <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">編集</a>
+                    <form action="/posts/{{ $post->id }}" id="post_delete" method="post" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <input type="button" onclick="deletePost();" value="削除" class="btn btn-primary">
+                    </form>
+                </div>
+                @endcan
+                
+                <div class="card-body">
+                    <h3 class="card-title">{{ $post->title }}</h3>
                     <p class="card-text">{{ $post->body }}</p>
+                    <h4 class="card-text">¥ {{ $post->price }}</h4>
                     <div class='card-text'><img src="{{ $post->image_path }}"></div>
                 </div>
                 
@@ -29,41 +43,26 @@
                     		</span>
                     	</a>
                     @endif
-                </div>
-                
-                <div class="card-body">
                     <a href="/{{ $post->id }}/likes/users" class="btn btn-secondary btn-sm">
-                    	いいねしたユーザー一覧
+                    	いいねしたユーザー
                     </a>
                 </div>
                 
-                
-                
-                
-                {{ Form::open(['url' => '/posts/{post}/addCart']) }}    
-
-                    {{--session保存用 --}}
-                    {{ Form::hidden('products_id', $post->id) }}
-                    {{ Form::hidden('users_id', Auth::id()) }}
-                    <input type="number" name="product_quantity" class="form-control" id="prodqty" pattern="[1-9][0-9]*" min="1" required autofocus>
-                    {!! Form::submit('カートへ追加', ['class' => 'btn btn-primary']) !!}
-                    
-                {!! Form::close() !!}
-                
-                
-                
-                
-                @can('isAdmin')
                 <div class="card-body">
-                    <a href="/posts/{{ $post->id }}/edit" class="card-link">編集</a>
-                    <form action="/posts/{{ $post->id }}" id="post_delete" method="post" style="display:inline">
+                    <form action="/posts/{{ $post->id }}/addCart" method="POST">
                         @csrf
-                        @method('DELETE')
-                        <input type="button" onclick="deletePost();" value="削除">
+                        <input type="hidden" name="products_id" value="{{$post->id}}">
+                        <input type="hidden" name="users_id" value="{{ Auth::id() }}">
+                        数量
+                        <input type="number" name="product_quantity" id="prodqty" pattern="[1-9][0-9]*" min="1" required autofocus>
+                        <input type="submit" value="カートへ追加" class="btn btn-warning btn-sm">
                     </form>
                 </div>
-                @endcan
-                    
+                
+                <div class="card-body">
+                    <a href="/posts/cartindex" class="btn btn-secondary">カートへ進む</a>
+                </div>
+                
                 <div class="card-body">
                     <a href="/" class="card-link">戻る</a>
                 </div>
@@ -88,11 +87,13 @@
                 <div class="card-body">
                     <div class='card-text' style='font-weight:  bold;'>投稿者：{{ $comment->user->name }}</p></div>
                     <div class='card-text'>{{ $comment->comment }}</p></div>
+                    @can('isAdmin')
                     <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
                         @csrf
                         @method('DELETE')
                         <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除">
                     </form>
+                    @endcan
                 </div>
             </div>
             @endforeach

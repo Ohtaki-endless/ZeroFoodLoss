@@ -15,13 +15,13 @@ class CommentController extends Controller
         $input += ['user_id' => $request->user()->id];
         $input += ['post_id' => $post->id];
         $comment->fill($input)->save();
-        return redirect('/posts/' . $input['post_id']);
+        return back();
     }
     
     // 削除処理（論理削除）
     public function delete(Comment $comment)
     {
         $comment->delete();
-        return redirect('/posts/' . $comment->post_id);
+        return back();
     }
 }
