@@ -29,7 +29,6 @@
                     @if($post->users()->where('user_id', Auth::id())->exists())
                     	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm">
                     		いいね
-                    		<!-- いいねの数を表示 -->
                     		<span class="badge">
                     			{{ $post->users()->count() }}
                     		</span>
@@ -37,7 +36,6 @@
                     @else
                     	<a href="/{{ $post->id }}/likes" class="btn btn-secondary btn-sm">
                     		いいね
-                    		<!-- いいねの数を表示 -->
                     		<span class="badge">
                     			{{ $post->users()->count() }}
                     		</span>
@@ -54,17 +52,27 @@
                         <input type="hidden" name="products_id" value="{{$post->id}}">
                         <input type="hidden" name="users_id" value="{{ Auth::id() }}">
                         数量
-                        <input type="number" name="product_quantity" id="prodqty" pattern="[1-9][0-9]*" min="1" required autofocus>
+                        <select name="product_quantity">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
                         <input type="submit" value="カートへ追加" class="btn btn-warning btn-sm">
                     </form>
                 </div>
                 
                 <div class="card-body">
-                    <a href="/posts/cartindex" class="btn btn-secondary">カートへ進む</a>
+                    <a href="/posts/cartindex" class="btn btn-secondary">
+                        カートへ進む
+                    </a>
                 </div>
                 
                 <div class="card-body">
-                    <a href="/" class="card-link">戻る</a>
+                    <a href="/" class="card-link">
+                        戻る
+                    </a>
                 </div>
             </div>
             

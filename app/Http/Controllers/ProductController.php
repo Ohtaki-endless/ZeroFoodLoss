@@ -78,13 +78,14 @@ class ProductController extends Controller
                 $data['itemPrice'] = $data['price'] * $data['session_quantity'];
             }
             unset($data);
-            dd($cartData);
 
-            // return view('', compact());
+            $totalPrice = number_format(array_sum(array_column($cartData, 'itemPrice')));
+
+            return view('cartlist', compact('sessionUser', 'cartData', 'totalPrice'));
 
         } else {
 
-            // return view('',  ['user' => Auth::user()]);
+            return view('no_cartlist');
         }
     }
 }
