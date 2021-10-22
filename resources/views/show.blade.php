@@ -64,7 +64,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <a href="/posts/cartindex" class="btn btn-secondary">
+                    <a href="/cartindex" class="btn btn-secondary">
                         カートへ進む
                     </a>
                 </div>
