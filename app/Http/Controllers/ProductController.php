@@ -50,7 +50,8 @@ class ProductController extends Controller
             }
         }
         $request->session()->put('users_id', ($request->users_id));
-        return back();
+        
+        return redirect('/cartindex');
     }
     
     

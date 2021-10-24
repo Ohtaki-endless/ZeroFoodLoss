@@ -19,10 +19,28 @@
                 @endcan
                 
                 <div class="card-body">
-                    <h3 class="card-title">{{ $post->title }}</h3>
-                    <p class="card-text">{{ $post->body }}</p>
-                    <h4 class="card-text">¥ {{ $post->price }}</h4>
-                    <div class='card-text'><img src="{{ $post->image_path }}"></div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="{{ $post->image_path }}" width="250" height="250">
+                        </div>
+                        <div class="col-lg-6 pt-4">
+                            <h3>{{ $post->title }}</h3>
+                            <p class="pt-2">{{ $post->body }}</p>
+                            <h4 class="pt-2">¥ {{ $post->price }}</h4>
+                            <form class="pt-5" action="/posts/{{ $post->id }}/addCart" method="POST" >
+                                @csrf
+                                <input type="hidden" name="products_id" value="{{$post->id}}">
+                                <input type="hidden" name="users_id" value="{{ Auth::id() }}">
+                                数量
+                                <select name="product_quantity">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <input type="submit" value="カートに追加" class="btn btn-warning btn-sm">
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="card-body">
@@ -47,26 +65,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <form action="/posts/{{ $post->id }}/addCart" method="POST">
-                        @csrf
-                        <input type="hidden" name="products_id" value="{{$post->id}}">
-                        <input type="hidden" name="users_id" value="{{ Auth::id() }}">
-                        数量
-                        <select name="product_quantity">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <input type="submit" value="カートへ追加" class="btn btn-warning btn-sm">
-                    </form>
-                </div>
-                
-                <div class="card-body">
-                    <a href="/cartindex" class="btn btn-secondary">
-                        カートへ進む
-                    </a>
+                    
                 </div>
                 
                 <div class="card-body">
