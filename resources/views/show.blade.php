@@ -65,10 +65,6 @@
                 </div>
                 
                 <div class="card-body">
-                    
-                </div>
-                
-                <div class="card-body">
                     <a href="/" class="card-link">
                         戻る
                     </a>

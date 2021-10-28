@@ -9,16 +9,19 @@
             <a href='/posts/create' class="btn btn-primary">新規投稿作成</a>
             @endcan
             
-            @foreach ($posts as $post)
-            <div class="card">
-                <div class="card-body">
-                    <h5 class='card-title'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h5>
-                    <div class='card-text'>{{ $post->body }}</p></div>
-                    <h5 class='card-text'>¥ {{ $post->price }}</p></h5>
-                    <div class='card-text'><img src="{{ $post->image_path }}"></div>
+            <div class="row">
+                @foreach ($posts as $post)
+                <div class="col-lg-6 pt-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class='card-text'><img src="{{ $post->image_path }}"></div>
+                            <h5 class='card-title pt-4'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h5>
+                            <h5 class='card-text'>¥ {{ $post->price }}</p></h5>
+                        </div>
+                    </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
             
             <div class='paginate'>
                 {{ $posts->links() }}
