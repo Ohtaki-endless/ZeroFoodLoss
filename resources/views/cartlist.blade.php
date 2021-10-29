@@ -38,7 +38,8 @@
                             </a>
                         </div>
                         <div class="col-xs-6 pl-4">
-                            <form action="">
+                            <form action="/cartindex/store" method="POST" >
+                                @csrf
                                 <input type="submit" name="orderFinalize" value="予約を確定する" class="btn btn-primary">
                             </form>
                         </div>

@@ -17,7 +17,7 @@ class PostController extends Controller
     } 
     
     // 投稿詳細画面
-    public function show(Post $post, Comment $comment)
+    public function show(Post $post)
     {
         $post->load('comments.user');
         return view('show', compact('post'));

@@ -16,7 +16,7 @@
                         <div class="card-body text-center">
                             <div class='card-text'><img src="{{ $post->image_path }}"></div>
                             <h5 class='card-title pt-4'><a href="/posts/{{ $post->id }}">{{ $post->title }}</a></h5>
-                            <h5 class='card-text'>¥ {{ $post->price }}</p></h5>
+                            <h5 class='card-text'>¥{{ number_format($post->price) }}</h5>
                         </div>
                     </div>
                 </div>

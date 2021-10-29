@@ -26,7 +26,7 @@
                         <div class="col-lg-6 pt-4">
                             <h3>{{ $post->title }}</h3>
                             <p class="pt-2">{{ $post->body }}</p>
-                            <h4 class="pt-2">¥ {{ $post->price }}</h4>
+                            <h4 class="pt-2">¥ {{ number_format($post->price) }}</h4>
                             <form class="pt-5" action="/posts/{{ $post->id }}/addCart" method="POST" >
                                 @csrf
                                 <input type="hidden" name="products_id" value="{{$post->id}}">

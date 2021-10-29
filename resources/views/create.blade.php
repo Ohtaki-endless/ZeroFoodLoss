@@ -18,23 +18,23 @@
                         
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">商品説明</label>
-                            <textarea class="form-control" name="post[body]" placeholder="商品説明入力...">{{ old('post.body') }}</textarea>
+                            <textarea class="form-control" name="post[body]" placeholder="商品説明">{{ old('post.body') }}</textarea>
                             <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                         </div>
                         
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">値段</label>
                             <input type="number" class="form-control" name="post[price]" placeholder="値段" value="{{ old('post.price') }}"/>
-                            <p class="title__error" style="color:red">{{ $errors->first('post.price') }}</p>
+                            <p class="price__error" style="color:red">{{ $errors->first('post.price') }}</p>
                         </div>
                         
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">商品画像</label>
                             <input type="file" name="image">
-                            <p class="body__error" style="color:red">{{ $errors->first('post.image') }}</p>
+                            <p class="image__error" style="color:red">{{ $errors->first('post.image') }}</p>
                         </div>    
                         
-                        <input type="submit" value="保存">
+                        <input type="submit" value="投稿">
                         
                         <a href="/">戻る</a>
                     </form>

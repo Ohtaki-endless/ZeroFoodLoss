@@ -17,6 +17,10 @@ class Post extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
     
+    public function orderdetails(){
+        return $this->hasMany('App\OrderDetail');
+    }
+    
     protected $fillable = [
         'title',
         'body',

@@ -24,8 +24,9 @@ Route::middleware(['auth','can:isAdmin'])->group(function(){
     });
     
 // カートリスト画面
-Route::get('/cartindex','ProductController@Cartindex');
-Route::post('/cartindex/{post}/remove', 'ProductController@remove');
+Route::get('/cartindex','ProductController@Cartindex')->middleware('auth');
+Route::post('/cartindex/store', 'ProductController@store')->middleware('auth');
+Route::post('/cartindex/{post}/remove', 'ProductController@remove')->middleware('auth');
 
 // 投稿一覧、投稿詳細
 Route::get('/', 'PostController@index');
@@ -45,4 +46,4 @@ Route::get('login/google', 'Auth\LoginController@redirectToGoogle');
 Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
 
 // カート機能追加
-Route::post('/posts/{post}/addCart','ProductController@addCart');
+Route::post('/posts/{post}/addCart','ProductController@addCart')->middleware('auth');
