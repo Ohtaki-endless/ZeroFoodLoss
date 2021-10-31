@@ -7,7 +7,7 @@
             <div class="card">
                 <h5 class="card-header">カート内容</h5>
                 
-                <div class="card-body">
+                <div class="card-body mx-auto">
                     @foreach ($cartData as $key => $data)
                     <div class="row pt-2 pb-2">
                         <div class="col-xs-4 pl-2">
@@ -25,12 +25,20 @@
                                 <input type="submit" value="削除" class="btn btn-danger">
                             </form>
                         </div>
-                        <hr>
                     </div>
                     @endforeach
                 </div>
                 
-                <div class="card-body">
+                <div class="d-flex flex-row mx-auto bg-light">
+                    <div class="p-2 align-items-center justify-content-center">
+                        <h4 class="my-1">合計</h4>
+                    </div>
+                    <div class="p-2 align-items-center justify-content-center">
+                        <h4 class="my-1">¥ {{ $totalPrice }} 円</h4>
+                    </div>
+                </div>
+
+                <div class="card-body mx-auto">
                     <div class="row">
                         <div class="col-xs-6 pl-4">
                             <a class="btn btn-success" href="/" role="button">

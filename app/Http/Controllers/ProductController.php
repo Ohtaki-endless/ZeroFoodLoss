@@ -131,7 +131,6 @@ class ProductController extends Controller
         $cartData = $request->session()->get('cartData');
         $now = Carbon::now();
 
-        //オブジェクト生成
         $order = new \App\Order;
         $order->user_id = Auth::user()->id;
         $order->order_date = $now;
@@ -163,6 +162,7 @@ class ProductController extends Controller
         $mail_data['user']=$user->name;
         $mail_data['order']=$order;
         Mail::to($user->email)->send(new Thanks($mail_data));
+        Mail::to(config('mail.username'))->send(new Thanks($mail_data));
         
         return view('ReserveCompleted', compact('order'));
     }
