@@ -152,6 +152,7 @@ return [
 	'post.title' => '商品名',
 	'post.body' => '商品説明',
 	'post.price' => '値段',
+	'post.quantity' => '数量',
 	'post.image' => '商品画像',
     ],
  

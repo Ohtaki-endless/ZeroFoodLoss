@@ -19,6 +19,8 @@ class CreatePostsTable extends Migration
             $table->string('body', 200);
             $table->integer('price')->unsigned()->index();
             $table->string('image_path')->nullable();
+            $table->tinyInteger('quantity');
+            $table->tinyInteger('role')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

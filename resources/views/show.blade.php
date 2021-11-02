@@ -23,22 +23,33 @@
                         <div class="col-lg-6">
                             <img src="{{ $post->image_path }}" width="250" height="250">
                         </div>
-                        <div class="col-lg-6 pt-4">
+                        <div class="col-lg-6 pt-2">
                             <h3>{{ $post->title }}</h3>
-                            <p class="pt-2">{{ $post->body }}</p>
-                            <h4 class="pt-2">¥ {{ number_format($post->price) }}</h4>
-                            <form class="pt-5" action="/posts/{{ $post->id }}/addCart" method="POST" >
-                                @csrf
-                                <input type="hidden" name="products_id" value="{{$post->id}}">
-                                <input type="hidden" name="users_id" value="{{ Auth::id() }}">
-                                数量
-                                <select name="product_quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
-                                <input type="submit" value="カートに追加" class="btn btn-warning btn-sm">
-                            </form>
+                            <p class="pt-2">
+                                {{ $post->body }}
+                            </p>
+                            <h4 class="pt-2">
+                                ¥ {{ number_format($post->price) }}
+                            </h4>
+                            @if($post->quantity != 0)
+                                <h5 class="pt-2">
+                                    在庫数：{{ number_format($post->quantity) }}
+                                </h5>
+                                <form class="pt-4" action="/posts/{{ $post->id }}/addCart" method="POST" >
+                                    @csrf
+                                    <input type="hidden" name="products_id" value="{{$post->id}}">
+                                    <input type="hidden" name="users_id" value="{{ Auth::id() }}">
+                                    数量
+                                    <select name="product_quantity">
+                                        @for ($i = 1; $i <= $post->quantity; $i++)
+                                            <option value="{{ $i }}">{{ $i }}</option>
+                                        @endfor
+                                    </select>
+                                    <input type="submit" value="カートに追加" class="btn btn-warning btn-sm">
+                                </form>
+                            @else
+                                <h4 class='card-text'><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
+                            @endif
                         </div>
                     </div>
                 </div>

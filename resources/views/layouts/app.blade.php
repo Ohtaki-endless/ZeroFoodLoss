@@ -50,6 +50,20 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="/cartindex">
+                                    カート
+                                    @if(session('cartData'))
+                                    <span class="badge rounded-pill bg-light">
+                                        {{ count(session('cartData')) }}
+                                    </span>
+                                    @else
+                                    <span class="badge rounded-pill bg-light">
+                                        0
+                                    </span>
+                                    @endif
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

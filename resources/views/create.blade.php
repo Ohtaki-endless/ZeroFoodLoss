@@ -29,6 +29,12 @@
                         </div>
                         
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">数量</label>
+                            <input type="number" class="form-control" name="post[quantity]" placeholder="数量" value="{{ old('post.quantity') }}"/>
+                            <p class="quantity__error" style="color:red">{{ $errors->first('post.quantity') }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">商品画像</label>
                             <input type="file" name="image">
                             <p class="image__error" style="color:red">{{ $errors->first('post.image') }}</p>
