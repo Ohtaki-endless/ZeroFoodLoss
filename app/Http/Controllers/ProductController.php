@@ -25,6 +25,11 @@ class ProductController extends Controller
             'session_quantity' => $request->product_quantity, 
         ];
         
+        // DBの商品個数更新
+        $post = Post::find($cartData['session_products_id']);
+        $quantity_result = $post->quantity - $cartData['session_quantity'];
+        $post->where('id', $cartData['session_products_id'])->update(['quantity' => $quantity_result]);
+        
         //sessionにcartData配列が「ない」場合$cartDataをsessionに追加
         //（カート内が空なら商品を追加する）
         if (!$request->session()->has('cartData')) {
@@ -110,6 +115,11 @@ class ProductController extends Controller
 
         foreach ($sessionCartData as $index => $sessionData) {
             if ($sessionData['session_products_id'] === $request->product_id ){
+                // DBの商品個数更新
+                $post = Post::find($sessionData['session_products_id']);
+                $quantity_result = $post->quantity + $sessionData['session_quantity'];
+                $post->where('id', $sessionData['session_products_id'])->update(['quantity' => $quantity_result]);
+                // 該当商品のセッション情報削除
                 $request->session()->forget('cartData.' . $index);
                 break;
             }
@@ -123,6 +133,7 @@ class ProductController extends Controller
 
         return view('no_cartlist', ['user' => Auth::user()]);
     }
+    
     
     
     // 購入予約確定

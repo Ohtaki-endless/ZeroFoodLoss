@@ -19,7 +19,7 @@
                             <h5 class='card-text'>¥{{ number_format($post->price) }}</h5>
                             <p class='card-text'>在庫数：{{ number_format($post->quantity) }}</p>
                             
-                            @if($post->quantity =! 0)
+                            @if($post->quantity != 0)
                                 <h4 class='card-text'><span class="text-white badge rounded-pill bg-danger">販売中</span></h4>
                             @else
                                 <h4 class='card-text'><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
