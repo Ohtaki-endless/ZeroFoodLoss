@@ -31,10 +31,20 @@
                             <h4 class="pt-2">
                                 ¥ {{ number_format($post->price) }}
                             </h4>
-                            @if($post->quantity != 0)
-                                <h5 class="pt-2">
+                            @if($post->role == 1)
+                                <h4 class='card-text'><span class="text-white badge rounded-pill bg-danger">販売中</span></h4>
+                                <h5 class="font-weight-bold">
                                     在庫数：{{ number_format($post->quantity) }}
                                 </h5>
+                                
+                                <div class="countdown-timer">
+                                    販売終了まであと</br>
+                                    <span id="days"></span>日
+                                    <span id="hours"></span>時間
+                                    <span id="min"></span>分
+                                    <span id="sec"></span>秒
+                                </div>
+                                
                                 <form class="pt-4" action="/posts/{{ $post->id }}/addCart" method="POST" >
                                     @csrf
                                     <input type="hidden" name="products_id" value="{{$post->id}}">
@@ -115,12 +125,48 @@
     </div>
 </div>
 <script>
+    const goal = @json($limit_date);
+    let count;
+    
+    function countDown(goal) {
+        const now = new Date();
+        const left = goal*1000 - now.getTime();
+        if (left > 0) {
+            const sec = Math.floor(left / 1000) % 60;
+            const min = Math.floor(left / 1000 / 60) % 60;
+            const hours = Math.floor(left / 1000 / 60 / 60) % 24;
+            const days = Math.floor(left / 1000 / 60 / 60 / 24);
+            count = { days: days, hours: hours, min: min, sec: sec };
+        } else {
+            count = { days: 0, hours: 0, min: 0, sec: 0 };
+        }
+        return count;
+    }
+        
+        //Timer処理
+    function setCountDown() {
+        let counter = countDown(goal);
+        let end = 0;
+        const countDownTimer = setTimeout(setCountDown, 1000);
+        
+        for (let item in counter) {
+            document.getElementById(item).textContent = counter[item];
+            end += parseInt(counter[item]);
+        }
+        if (end === 0) {
+            clearTimeout(countDownTimer);
+        }
+    }
+    setCountDown();
+    
+    
     function deletePost(){
         'use strict'
         if (window.confirm('削除すると復元できません。\n本当に削除しますか？')) {
             document.getElementById('post_delete').submit();
         }
     }
+    
     
     function deleteComment(e){
         'use strict'

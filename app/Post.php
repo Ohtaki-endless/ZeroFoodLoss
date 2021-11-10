@@ -25,7 +25,8 @@ class Post extends Model
         'title',
         'body',
         'price',
-        'quantity'
+        'quantity',
+        'limit'
     ];
     
     public function getPaginateByLimit(int $limit_count = 5)

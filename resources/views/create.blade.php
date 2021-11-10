@@ -35,6 +35,12 @@
                         </div>
                         
                         <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">期限</label>
+                            <input type="datetime-local" class="form-control" name="post[limit]" placeholder="期限" value="{{ old('post.limit') }}"/>
+                            <p class="limit__error" style="color:red">{{ $errors->first('post.limit') }}</p>
+                        </div>
+                        
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">商品画像</label>
                             <input type="file" name="image">
                             <p class="image__error" style="color:red">{{ $errors->first('post.image') }}</p>

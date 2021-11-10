@@ -20,7 +20,10 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post->load('comments.user');
-        return view('show', compact('post'));
+        // strtotimeメソッドでタイムスタンプに変換
+        $limit_date = strtotime($post->limit);
+        
+        return view('show', compact('post' , 'limit_date'));
     }
     
     // 新規投稿画面表示

@@ -29,6 +29,10 @@ class ProductController extends Controller
         $post = Post::find($cartData['session_products_id']);
         $quantity_result = $post->quantity - $cartData['session_quantity'];
         $post->where('id', $cartData['session_products_id'])->update(['quantity' => $quantity_result]);
+        // ロールの更新
+        if($quantity_result == 0){
+            $post->where('id', $cartData['session_products_id'])->update(['role' => 10]);
+        }
         
         //sessionにcartData配列が「ない」場合$cartDataをsessionに追加
         //（カート内が空なら商品を追加する）
@@ -119,6 +123,9 @@ class ProductController extends Controller
                 $post = Post::find($sessionData['session_products_id']);
                 $quantity_result = $post->quantity + $sessionData['session_quantity'];
                 $post->where('id', $sessionData['session_products_id'])->update(['quantity' => $quantity_result]);
+                // ロールの更新
+                $post->where('id', $sessionData['session_products_id'])->update(['role' => 1]);
+                
                 // 該当商品のセッション情報削除
                 $request->session()->forget('cartData.' . $index);
                 break;
