@@ -34,7 +34,7 @@
                         <h4 class="my-1">合計</h4>
                     </div>
                     <div class="p-2 align-items-center justify-content-center">
-                        <h4 class="my-1">¥ {{ $totalPrice }} 円</h4>
+                        <h4 class="my-1">¥ {{ number_format($totalPrice) }} 円</h4>
                     </div>
                 </div>
 
@@ -49,6 +49,7 @@
                             <form action="/cartindex/store" method="POST" >
                                 @csrf
                                 <input type="submit" name="orderFinalize" value="予約を確定する" class="btn btn-primary">
+                                <input type="hidden" name="total_price" value="{{ $totalPrice }}">
                             </form>
                         </div>
                     </div>

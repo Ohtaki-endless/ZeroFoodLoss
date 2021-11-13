@@ -102,7 +102,7 @@ class ProductController extends Controller
             }
             unset($data);
             // 合計金額の計算
-            $totalPrice = number_format(array_sum(array_column($cartData, 'itemPrice')));
+            $totalPrice = array_sum(array_column($cartData, 'itemPrice'));
 
             return view('cartlist', compact('sessionUser', 'cartData', 'totalPrice'));
         } else {
@@ -148,9 +148,10 @@ class ProductController extends Controller
     {
         $cartData = $request->session()->get('cartData');
         $now = Carbon::now();
-
+        
         $order = new \App\Order;
         $order->user_id = Auth::user()->id;
+        $order->total_price = $request->total_price;
         $order->order_date = $now;
         $order->order_number = rand();
         //認証済みのユーザーのみオブジェクトへ保存

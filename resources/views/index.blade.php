@@ -6,7 +6,7 @@
         <div class="col-md-8">
             
             @can('isAdmin')
-            <a href='/posts/create' class="btn btn-primary">新規投稿作成</a>
+            <a href='/posts/create' class="btn btn-primary">商品新規登録</a>
             @endcan
             
             <div class="row">

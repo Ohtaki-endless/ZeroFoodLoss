@@ -22,7 +22,11 @@ Route::middleware(['auth','can:isAdmin'])->group(function(){
         Route::delete('/posts/{post}', 'PostController@delete');
         Route::post('/posts', 'PostController@store');
     });
-    
+
+// マイページ
+Route::get('/user/{id}', 'Admin\UserController@mypage');
+Route::get('/user/{id}/order-history', 'Admin\UserController@OrderHistory');
+   
 // カートリスト画面
 Route::get('/cartindex','ProductController@Cartindex')->middleware('auth');
 Route::post('/cartindex/store', 'ProductController@store')->middleware('auth');
