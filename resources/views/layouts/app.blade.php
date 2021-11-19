@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -19,13 +19,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet">
+    
+    
 </head>
 <body>
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -41,36 +44,39 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
+                            <div class="d-flex align-items-center">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="btn btn-link px-3 me-2" href="{{ route('login') }}">
+                                        {{ __('Login') }}
+                                    </a>
                                 </li>
-                            @endif
+                                @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="btn btn-primary me-3" href="{{ route('register') }}">
+                                        {{ __('Register') }}
+                                    </a>
+                                </li>
+                                @endif
+                            </div>
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="/cartindex">
-                                    カート
+                              <!-- カート -->
+                                <a class="nav-link btn-default" href="/cartindex">
+                                    <i class="fas fa-shopping-cart fa-lg"></i>
                                     @if(session('cartData'))
-                                    <span class="badge rounded-pill bg-light">
+                                    <span class="badge badge-danger rounded-pill badge-dot badge-notify">
                                         {{ count(session('cartData')) }}
-                                    </span>
-                                    @else
-                                    <span class="badge rounded-pill bg-light">
-                                        0
                                     </span>
                                     @endif
                                 </a>
-                            </li>
+                            
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                     <li>
-                                        <a class="dropdown-item" href="/user/{{ Auth::user()->id }}">マイページ</a>
+                                        <a class="dropdown-item" href="/user/index">マイページ</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
@@ -94,6 +100,45 @@
         <main class="py-4">
             @yield('content')
         </main>
+        
+    <!-- Footer -->
+    <footer class="text-center text-lg-start bg-light text-muted">
+
+        <!-- Section: Links  -->
+        <section class="border-top">
+            <div class="container text-center text-md-start mt-3">
+                <!-- Grid row -->
+                
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                      <!-- Links -->
+                      <h6 class="text-uppercase fw-bold mb-4">
+                        お問い合わせ
+                      </h6>
+                      <p>
+                        <i class="fas fa-home me-3"></i> 
+                        新潟県村上市
+                      </p>
+                      <p>
+                        <i class="fas fa-envelope me-3"></i>
+                        zerofood-loss@yahoo.co.jp
+                      </p>
+                    </div>
+                    <!-- Grid column -->
+                
+            <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2021 Copyright : {{ config('app.name') }}
+        </div>
+        <!-- Copyright -->
+        
+    </footer>
+    <!-- Footer -->
     </div>
 </body>
 </html>

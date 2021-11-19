@@ -7,6 +7,10 @@
             <div class="card">
                 <h5 class="card-header">商品予約履歴</h5>
                 
+                @if(empty($user->orders[0]))
+                    <div class="card-body">商品予約履歴はありません</div>
+                @else
+                
                 <div class="card-body mx-auto">
                     @foreach ($user->orders as $order)
                     <div class="card">
@@ -30,9 +34,10 @@
                     </div>
                     @endforeach
                 </div>
+                @endif
                 
                 <div class="card-body">
-                    <a href="/user/{{ Auth::user()->id }}" class="card-link">
+                    <a href="/user/index" class="card-link">
                         戻る
                     </a>
                 </div>

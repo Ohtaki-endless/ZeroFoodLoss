@@ -7,6 +7,7 @@ use App\Comment;
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostRequest;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -21,9 +22,9 @@ class PostController extends Controller
     {
         $post->load('comments.user');
         // strtotimeメソッドでタイムスタンプに変換
-        $limit_date = strtotime($post->limit);
+        $limit = strtotime($post->limit);
         
-        return view('show', compact('post' , 'limit_date'));
+        return view('show', compact('post' , 'limit'));
     }
     
     // 新規投稿画面表示

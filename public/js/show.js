@@ -1,7 +1,11 @@
     let count;
+    // 売切表示を初期状態では非表示にしておく
+    document.getElementById("sold-out").style.display ="none";
     
+    // 時間の計算
     function countDown(goal) {
         const now = new Date();
+        // 期限時間ー現在の時間
         const left = goal*1000 - now.getTime();
         if (left > 0) {
             const sec = Math.floor(left / 1000) % 60;
@@ -15,7 +19,7 @@
         return count;
     }
         
-        //Timer処理
+    //Timer処理
     function setCountDown() {
         let counter = countDown(goal);
         let end = 0;
@@ -28,10 +32,15 @@
         // タイマーがゼロになったときの処理
         if (end === 0) {
             clearTimeout(countDownTimer);
-            
+            // 販売中の要素を非表示
+            document.getElementById("sale").style.display ="none";
+            // 売り切れの要素を表示
+            document.getElementById("sold-out").style.display ="block";
         }
     }
+    // タイマーの実行
     setCountDown();
+    
     
     
     function deletePost(){

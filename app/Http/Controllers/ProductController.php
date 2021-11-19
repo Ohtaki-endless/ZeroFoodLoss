@@ -29,13 +29,13 @@ class ProductController extends Controller
         $post = Post::find($cartData['session_products_id']);
         $quantity_result = $post->quantity - $cartData['session_quantity'];
         $post->where('id', $cartData['session_products_id'])->update(['quantity' => $quantity_result]);
+        
         // ロールの更新
         if($quantity_result == 0){
             $post->where('id', $cartData['session_products_id'])->update(['role' => 10]);
         }
         
-        //sessionにcartData配列が「ない」場合$cartDataをsessionに追加
-        //（カート内が空なら商品を追加する）
+        //sessionにcartData配列が「ない」場合$cartDataをsessionに追加（カート内が空なら商品を追加する）
         if (!$request->session()->has('cartData')) {
             $request->session()->push('cartData', $cartData);
             

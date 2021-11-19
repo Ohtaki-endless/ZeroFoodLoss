@@ -6,6 +6,12 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+.btn-default >.badge-notify{
+  background:red;
+  position:relative;
+  bottom: 8px;
+  left: -12px;
+}
 
 :root {
   --blue: #3490dc;

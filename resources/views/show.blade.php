@@ -32,6 +32,7 @@
                                 ¥ {{ number_format($post->price) }}
                             </h4>
                             @if($post->role == 1)
+                            <div id="sale">
                                 <h4 class='card-text'><span class="text-white badge rounded-pill bg-danger">販売中</span></h4>
                                 <h5 class="font-weight-bold">
                                     在庫数：{{ number_format($post->quantity) }}
@@ -57,8 +58,15 @@
                                     </select>
                                     <input type="submit" value="カートに追加" class="btn btn-warning btn-sm">
                                 </form>
+                            </div>
+                            
+                            <div id="sold-out">
+                                <h4 class="card-text"><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
+                                <p class="card-text">申し訳ございません。<br>こちらの商品は、購入期限切れとなりました。</p>
+                            </div>
                             @else
-                                <h4 class='card-text'><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
+                                <h4 class="card-text"><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
+                                <p class="card-text">申し訳ございません。<br>こちらの商品は、売り切れとなりました。</p>
                             @endif
                         </div>
                     </div>
@@ -124,6 +132,6 @@
         </div>
     </div>
 </div>
-<script>const goal = @json($limit_date)</script>
+<script>const goal = @json($limit)</script>
 <script src="{{ asset('/js/show.js') }}"></script>
 @endsection

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -11,32 +11,29 @@ class UserController extends Controller
 {
     
     // マイページ
-    public function mypage()
+    public function index()
     {
-        return view('mypage');
+        return view('user.index');
     } 
     
+    // 商品予約の履歴
     public function OrderHistory()
     {
         $user = Auth::user();
         $user->load('orders.orderdetails.post');
-        
-        return view('OrderHistory', compact('user'));
+        return view('user.OrderHistory', compact('user'));
     }
     
-    //userデータの取得
-    public function index() {
-        return view('user.index', ['user' => Auth::user() ]);
-    }
-    
-    //userデータの編集
-    public function edit() {
-        return view('user.edit', ['user' => Auth::user() ]);
+    // ユーザー登録情報変更画面
+    public function edit() 
+    {
+        $user = Auth::user();
+        return view('user.edit', compact('user'));
     }
     
     //userデータの保存
-    public function update(Request $request) {
-
+    public function update(Request $request) 
+    {
         $user_form = $request->all();
         $user = Auth::user();
         //不要な「_token」の削除

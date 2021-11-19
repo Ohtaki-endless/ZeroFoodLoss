@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    // コメント投稿処理
     public function store(Comment $comment, CommentRequest $request, Post $post)
     {
         $input = $request['comment'];
@@ -18,7 +19,7 @@ class CommentController extends Controller
         return back();
     }
     
-    // 削除処理（論理削除）
+    // コメント削除処理
     public function delete(Comment $comment)
     {
         $comment->delete();

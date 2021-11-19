@@ -11,13 +11,18 @@
                 <div class="card-body">
                     <div class="card-deck">
                         <div class="card">
-                            <a href="/user/{{ Auth::user()->id }}/order-history" class="abcd card-body text-center text-decoration-none">
+                            <a href="/user/order-history" class="abcd card-body text-center text-decoration-none">
                                 商品予約の履歴
                             </a>
                         </div>
                         <div class="card">
-                            <a href="/user/{{ Auth::user()->id }}/edit" class="abcd card-body text-center text-decoration-none">
-                                登録情報の変更
+                            <a href="" class="abcd card-body text-center text-decoration-none">
+                                いいねした商品一覧
+                            </a>
+                        </div>
+                        <div class="card">
+                            <a href="/user/edit" class="abcd card-body text-center text-decoration-none">
+                                ユーザー登録情報の変更
                             </a>
                         </div>
                     </div>
