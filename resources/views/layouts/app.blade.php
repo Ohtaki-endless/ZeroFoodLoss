@@ -25,7 +25,7 @@
 <body>
     <div id="app" class="footerFixed">
         <!-- Navbar -->
-        <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-2">
+        <header class="navbar navbar-expand-md navbar-light shadow-sm p-2" style="background-color:#e6ffff;">
             <div class="container">
                 <a class="navbar-brand font-weight-bold" href="{{ url('/') }}">
                     {{ config('app.name') }}
@@ -52,7 +52,7 @@
                                 </li>
                                 @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-primary rounded-pill me-3" href="{{ route('register') }}">
+                                    <a class="btn btn-light rounded-pill me-3" href="{{ route('register') }}">
                                         {{ __('Register') }}
                                     </a>
                                 </li>
@@ -104,7 +104,7 @@
         </main>
         
         <!-- Footer -->
-        <footer class="text-center text-muted w-100">
+        <footer class="text-center text-muted w-100" style="background-color:#e6ffff;">
     
             <!-- Section: Links  -->
             <section class="border-top">

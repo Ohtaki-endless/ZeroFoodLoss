@@ -27,7 +27,32 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <img class="mx-auto d-block" src="{{ $post->image_path }}" width="280" height="280">
+                            
+                            <div class="card-body mx-auto">
+                                @if($post->users()->where('user_id', Auth::id())->exists())
+                                	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm rounded-pill">
+                                		いいね
+                                		<span class="badge">
+                                			{{ $post->users()->count() }}
+                                		</span>
+                                	</a>
+                                @else
+                                	<a href="/{{ $post->id }}/likes" class="btn btn-outline-danger btn-sm rounded-pill">
+                                		いいね
+                                		<span class="badge">
+                                			{{ $post->users()->count() }}
+                                		</span>
+                                	</a>
+                                @endif
+                                
+                                @can('isAdmin')
+                                    <a href="/{{ $post->id }}/likes/users" class="btn btn-secondary btn-sm">
+                                	    いいねしたユーザー
+                                    </a>
+                                @endcan
+                            </div>
                         </div>
+                        
                         <div class="col-lg-6 pt-2">
                             <h3>
                                 {{ $post->title }}
@@ -100,35 +125,18 @@
                 </div>
                 
                 <div class="card-body">
-                    @if($post->users()->where('user_id', Auth::id())->exists())
-                    	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm">
-                    		いいね
-                    		<span class="badge">
-                    			{{ $post->users()->count() }}
-                    		</span>
-                    	</a>
-                    @else
-                    	<a href="/{{ $post->id }}/likes" class="btn btn-secondary btn-sm">
-                    		いいね
-                    		<span class="badge">
-                    			{{ $post->users()->count() }}
-                    		</span>
-                    	</a>
-                    @endif
-                    <a href="/{{ $post->id }}/likes/users" class="btn btn-secondary btn-sm">
-                    	いいねしたユーザー
-                    </a>
-                </div>
-                
-                <div class="card-body">
-                    <a href="/" class="card-link">
+                    <a href="/" class="card-link btn btn-outline-secondary">
                         商品一覧へ戻る
                     </a>
                 </div>
             </div>
-            
+        </div>
+        
+        <div class="col-md-8 pt-3">
             <div class="card">
-                <div class="card-header">コメントを投稿</div>
+                <div class="card-header">
+                    コメントを投稿
+                </div>
                 <div class="card-body">
                     <form action="/{{ $post->id }}/comments" method="POST">
                         @csrf
@@ -140,12 +148,18 @@
                     </form>
                 </div>
             </div>
+        </div>
             
+        <div class="col-md-8">
             @foreach ($post->comments as $comment)
             <div class="card">
                 <div class="card-body">
-                    <div class='card-text' style='font-weight:  bold;'>投稿者：{{ $comment->user->name }}</p></div>
-                    <div class='card-text'>{{ $comment->comment }}</p></div>
+                    <div class='card-text' style='font-weight:  bold;'>
+                        投稿者：{{ $comment->user->name }}
+                    </div>
+                    <div class='card-text'>
+                        {{ $comment->comment }}
+                    </div>
                     @can('isAdmin')
                     <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
                         @csrf

@@ -14,14 +14,14 @@
                         @csrf
                         
                         <div class="form-group">
-                            <label for="name">ユーザー名</label>
+                            <label for="name" class="h5">ユーザー名</label>
                             <div>
                                 <input type="text" name="name" class="form-control" value="{{ $user->name }}">
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">メールアドレス</label>
+                            <label for="email" class="h5">メールアドレス</label>
                             <div>
                                 <input type="text" name="email" class="form-control" value="{{ $user->email }}">
                             </div>
@@ -32,7 +32,7 @@
                 </div>
                 
                 <div class="card-body">
-                    <a href="/user/index" class="card-link">
+                    <a href="/user/index" class="card-link btn btn-outline-secondary">
                         変更せずに戻る
                     </a>
                 </div>

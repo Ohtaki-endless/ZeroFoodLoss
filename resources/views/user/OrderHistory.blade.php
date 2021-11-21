@@ -33,9 +33,15 @@
                                         <img src="{{ $orderdetail->post->image_path }}" width="150" height="150">
                                     </div>
                                     <div class="col-xs-8 pl-3">
-                                        <h5 class="pt-2">{{ $orderdetail->post->title }}</h5>
-                                        <p>¥{{ $orderdetail->post->price }} × {{ $orderdetail->order_quantity }}個</p>
-                                        <p>小計  ¥{{ $orderdetail->post->price * $orderdetail->order_quantity }}円</p>
+                                        <h5 class="pt-2">
+                                            {{ $orderdetail->post->title }}
+                                        </h5>
+                                        <p>
+                                            ¥ {{ $orderdetail->post->price }} × {{ $orderdetail->order_quantity }}個
+                                        </p>
+                                        <p>
+                                            小計 ¥ {{ $orderdetail->post->price * $orderdetail->order_quantity }}円
+                                        </p>
                                     </div>
                                 </div>
                             @endforeach
@@ -45,7 +51,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <a href="/user/index" class="card-link">
+                    <a href="/user/index" class="card-link btn btn-outline-secondary">
                         戻る
                     </a>
                 </div>

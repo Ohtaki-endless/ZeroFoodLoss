@@ -63,7 +63,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <a href="/user/index" class="card-link">
+                    <a href="/user/index" class="card-link btn btn-outline-secondary">
                         戻る
                     </a>
                 </div>
