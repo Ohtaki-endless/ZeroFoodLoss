@@ -53,7 +53,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary rounded-pill">
                                     {{ __('Login') }}
                                 </button>
 
@@ -67,10 +67,18 @@
                     </form>
                     
                     <!--google login-->
-                    <div class="form-group row mt-2">
+                    <div class="form-group row mt-4">
                         <div class="col-md-8 offset-md-4">
-                            <a class="btn btn-google"  href="login/google">
+                            <a class="btn btn-google rounded-pill"  href="login/google">
                                 <span class ="fab fa-google"></span> Googleでログイン
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row mt-4">
+                        <div class="col-md-8 offset-md-4">
+                            <a class="btn btn-light rounded-pill" href="{{ route('register') }}">
+                                アカウントを作成する
                             </a>
                         </div>
                     </div>

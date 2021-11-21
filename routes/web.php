@@ -21,6 +21,7 @@ Route::get('/', 'PostController@index');
 Route::middleware(['auth','can:isAdmin'])->group(function()
    {
         Route::get('/posts/create', 'PostController@create');
+        Route::get('/posts/{post}/role', 'PostController@role');
         Route::get('/posts/{post}/edit', 'PostController@edit');
         Route::put('/posts/{post}', 'PostController@update');
         Route::delete('/posts/{post}', 'PostController@delete');
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function()
         // マイページ
         Route::get('/user/index', 'UserController@index');
         Route::get('/user/edit', 'UserController@edit');
+        Route::get('/user/likes', 'UserController@likes');
         Route::get('/user/order-history', 'UserController@OrderHistory');
         Route::post('/user/edit', 'UserController@update');
         

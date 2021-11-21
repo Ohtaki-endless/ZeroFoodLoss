@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">ユーザー登録内容の変更</div>
+                <div class="card-header h5">
+                    ユーザー登録内容の変更
+                </div>
+                
                 <div class="card-body">
                     <form method="POST" action="/user/edit">
                         @csrf
@@ -24,8 +27,14 @@
                             </div>
                         </div>
                         
-                        <input type="submit" value="変更">
+                        <input class="btn btn-primary rounded-pill" type="submit" value="変更">
                     </form>
+                </div>
+                
+                <div class="card-body">
+                    <a href="/user/index" class="card-link">
+                        変更せずに戻る
+                    </a>
                 </div>
             </div>
         </div>

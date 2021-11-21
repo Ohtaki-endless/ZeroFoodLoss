@@ -9,34 +9,47 @@
                 <!--管理者のみ表示-->
                 @can('isAdmin')
                 <div class="card-body">
-                    <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary">編集</a>
+                    <a href="/posts/{{ $post->id }}/edit" class="btn btn-primary btn-lg">
+                        編集
+                    </a>
                     <form action="/posts/{{ $post->id }}" id="post_delete" method="post" style="display:inline">
                         @csrf
                         @method('DELETE')
-                        <input type="button" onclick="deletePost();" value="削除" class="btn btn-primary">
+                        <input type="button" onclick="deletePost();" value="削除" class="btn btn-primary btn-lg">
                     </form>
+                    <a href="/posts/{{ $post->id }}/role" class="btn btn-primary btn-lg">
+                        販売状態の切り替え
+                    </a>
                 </div>
                 @endcan
                 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <img src="{{ $post->image_path }}" width="250" height="250">
+                            <img class="mx-auto d-block" src="{{ $post->image_path }}" width="280" height="280">
                         </div>
                         <div class="col-lg-6 pt-2">
-                            <h3>{{ $post->title }}</h3>
+                            <h3>
+                                {{ $post->title }}
+                            </h3>
                             <p class="pt-2">
                                 {{ $post->body }}
                             </p>
-                            <h4 class="pt-2">
+                            <h3 class="pt-2 font-weight-bold">
                                 ¥ {{ number_format($post->price) }}
-                            </h4>
+                            </h3>
+                            
                             @if($post->role == 1)
                             <div id="sale">
-                                <h4 class='card-text'><span class="text-white badge rounded-pill bg-danger">販売中</span></h4>
-                                <h5 class="font-weight-bold">
+                                <h5 class="font-weight-bold pt-2">
                                     在庫数：{{ number_format($post->quantity) }}
                                 </h5>
+                                
+                                <h4 class='card-text'>
+                                    <span class="text-white badge rounded-pill bg-danger">
+                                        販売中
+                                    </span>
+                                </h4>
                                 
                                 <div class="countdown-timer">
                                     販売終了まであと</br>
@@ -56,17 +69,31 @@
                                             <option value="{{ $i }}">{{ $i }}</option>
                                         @endfor
                                     </select>
-                                    <input type="submit" value="カートに追加" class="btn btn-warning btn-sm">
+                                    <input type="submit" value="カートに追加" class="btn btn-primary rounded-pill">
                                 </form>
                             </div>
                             
                             <div id="sold-out">
-                                <h4 class="card-text"><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
-                                <p class="card-text">申し訳ございません。<br>こちらの商品は、購入期限切れとなりました。</p>
+                                <h4 class="card-text">
+                                    <span class="text-white badge rounded-pill bg-secondary">
+                                        売り切れ
+                                    </span>
+                                </h4>
+                                <p class="card-text">
+                                    申し訳ございません。<br>
+                                    こちらの商品は、購入期限切れとなりました。
+                                </p>
                             </div>
                             @else
-                                <h4 class="card-text"><span class="text-white badge rounded-pill bg-secondary">売り切れ</span></h4>
-                                <p class="card-text">申し訳ございません。<br>こちらの商品は、売り切れとなりました。</p>
+                                <h4 class="card-text">
+                                    <span class="text-white badge rounded-pill bg-secondary">
+                                        売り切れ
+                                    </span>
+                                </h4>
+                                <p class="card-text">
+                                    申し訳ございません。<br>
+                                    こちらの商品は、売り切れとなりました。
+                                </p>
                             @endif
                         </div>
                     </div>
@@ -95,7 +122,7 @@
                 
                 <div class="card-body">
                     <a href="/" class="card-link">
-                        戻る
+                        商品一覧へ戻る
                     </a>
                 </div>
             </div>
@@ -109,7 +136,7 @@
                             <textarea class="form-control" name="comment[comment]" placeholder="コメントを入力">{{ old('comment.body') }}</textarea>
                             <p class="comment__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
                         </div>
-                        <input type="submit" value="投稿">
+                        <input class="btn btn-secondary rounded-pill" type="submit" value="投稿">
                     </form>
                 </div>
             </div>

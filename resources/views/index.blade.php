@@ -6,7 +6,7 @@
         <div class="col-md-8">
             
             @can('isAdmin')
-            <a href='/posts/create' class="btn btn-primary">商品新規登録</a>
+            <a href='/posts/create' class="btn btn-primary btn-lg">商品新規登録</a>
             @endcan
             
             <div class="row">
@@ -17,12 +17,14 @@
                             <div class='card-text'>
                                 <img src="{{ $post->image_path }}" width="180" height="180">
                             </div>
-                            <h5 class='card-title pt-4'>
-                                <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
-                            </h5>
-                            <h5 class='card-text'>
+                            <h4 class='card-title pt-4'>
+                                <a class="stretched-link" href="/posts/{{ $post->id }}">
+                                    {{ $post->title }}
+                                </a>
+                            </h4>
+                            <h3 class='card-text font-weight-bold'>
                                 ¥ {{ number_format($post->price) }}
-                            </h5>
+                            </h3>
                             <p class='card-text'>
                                 在庫数：{{ number_format($post->quantity) }}
                             </p>
@@ -39,7 +41,7 @@
                 @endforeach
             </div>
             
-            <div class='paginate'>
+            <div class='paginate pt-3'>
                 {{ $posts->links() }}
             </div>
             

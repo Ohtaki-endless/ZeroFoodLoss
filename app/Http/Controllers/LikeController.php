@@ -19,7 +19,7 @@ class LikeController extends Controller
         return back();
     }
     
-    // いいねしたユーザー一覧表示処理
+    // いいねしたユーザー一覧表示
     public function likeusers(Post $post){
         $post->load('users');
         return view('likeusers', compact('post'));

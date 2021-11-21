@@ -25,9 +25,9 @@
 <body>
     <div id="app">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-2">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand font-weight-bold" href="{{ url('/') }}">
                     {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -46,63 +46,65 @@
                         @guest
                             <div class="d-flex align-items-center">
                                 <li class="nav-item">
-                                    <a class="btn btn-link px-3 me-2" href="{{ route('login') }}">
+                                    <a class="btn btn-light rounded-pill px-3 me-2" href="{{ route('login') }}">
                                         {{ __('Login') }}
                                     </a>
                                 </li>
                                 @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-primary me-3" href="{{ route('register') }}">
+                                    <a class="btn btn-primary rounded-pill me-3" href="{{ route('register') }}">
                                         {{ __('Register') }}
                                     </a>
                                 </li>
                                 @endif
                             </div>
                         @else
-                              <!-- カート -->
-                                <a class="nav-link btn-default" href="/cartindex">
-                                    <i class="fas fa-shopping-cart fa-lg"></i>
-                                    @if(session('cartData'))
-                                    <span class="badge badge-danger rounded-pill badge-dot badge-notify">
-                                        {{ count(session('cartData')) }}
-                                    </span>
-                                    @endif
-                                </a>
-                            
-                            
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                    <li>
-                                        <a class="dropdown-item" href="/user/index">マイページ</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('ログアウト') }}
-                                        </a>
+                            <div class="d-flex align-items-center">
+                                <!-- カート -->
+                                <li class="nav-item pr-4 pt-3">
+                                    <a class="nav-link btn-default" href="/cartindex">
+                                        <i class="fas fa-shopping-cart fa-2x"></i>
+                                        @if(session('cartData'))
+                                            <span class="badge badge-primary rounded-pill badge-dot badge-notify">
+                                                {{ count(session('cartData')) }}
+                                            </span>
+                                        @endif
+                                        <p>カート</p>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item pt-3">
+                                    <a class="nav-link btn-default text-center" href="/user/index">
+                                        <i class="fas fa-user fa-2x"></i>
+                                        <p>マイページ</p>
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item pl-3">
+                                    <a class="btn btn-light rounded-pill pl-3" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('ログアウト') }}
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </div>
+                            
                         @endguest
                     </ul>
                 </div>
             </div>
-        </nav>
+        </header>
 
         <main class="py-4">
             @yield('content')
         </main>
         
     <!-- Footer -->
-    <footer class="text-center text-lg-start bg-light text-muted">
+    <footer class="text-center text-muted">
 
         <!-- Section: Links  -->
         <section class="border-top">
@@ -117,7 +119,7 @@
                       </h6>
                       <p>
                         <i class="fas fa-home me-3"></i> 
-                        新潟県村上市
+                        新潟県村上市◯◯◯
                       </p>
                       <p>
                         <i class="fas fa-envelope me-3"></i>

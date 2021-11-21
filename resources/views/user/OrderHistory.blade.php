@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <h5 class="card-header">商品予約履歴</h5>
+                <div class="card-header h5">
+                    商品予約履歴
+                </div>
                 
                 @if(empty($user->orders[0]))
                     <div class="card-body">商品予約履歴はありません</div>
@@ -14,10 +16,16 @@
                 <div class="card-body mx-auto">
                     @foreach ($user->orders as $order)
                     <div class="card">
-                        <h5 class="card-header">予約受付日：{{ $order->order_date }}</h5>
+                        <h5 class="card-header">
+                            予約受付日：{{ $order->order_date }}
+                        </h5>
                         <div class="card-body">
-                            予約番号：{{ $order->order_number }}<br>
-                            合計金額：{{ number_format($order->total_price) }} 円
+                            <p>
+                                予約番号：{{ $order->order_number }}<br>
+                            </p>
+                            <h5>
+                                合計金額：{{ number_format($order->total_price) }} 円
+                            </h5>
                         </div>
                             @foreach ($order->orderdetails as $orderdetail)
                                 <div class="card-body row pt-2 pb-2">
@@ -27,7 +35,7 @@
                                     <div class="col-xs-8 pl-3">
                                         <h5 class="pt-2">{{ $orderdetail->post->title }}</h5>
                                         <p>¥{{ $orderdetail->post->price }} × {{ $orderdetail->order_quantity }}個</p>
-                                        <h5>小計  ¥{{ $orderdetail->post->price * $orderdetail->order_quantity }}円</h5>
+                                        <p>小計  ¥{{ $orderdetail->post->price * $orderdetail->order_quantity }}円</p>
                                     </div>
                                 </div>
                             @endforeach

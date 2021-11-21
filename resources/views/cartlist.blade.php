@@ -13,11 +13,17 @@
                         <div class="col-xs-4 pl-2">
                             <img src="{{ $data['product_image'] }}" width="150" height="150">
                         </div>
+                        
                         <div class="col-xs-8 pl-3">
-                            <h5 class="pt-2">{{ $data['product_name'] }}</h5>
-                            <p>¥{{ number_format($data['price']) }} × {{ $data['session_quantity'] }}個</p>
-                            <h5>小計  ¥{{ number_format($data['session_quantity'] * $data['price']) }}円</h5>
-                            
+                            <h5 class="pt-2">
+                                {{ $data['product_name'] }}
+                            </h5>
+                            <p>
+                                ¥ {{ number_format($data['price']) }} × {{ $data['session_quantity'] }}個
+                            </p>
+                            <h5>
+                                小計 ¥ {{ number_format($data['session_quantity'] * $data['price']) }}円
+                            </h5>
                             <form action="/cartindex/{{ $data['session_products_id'] }}/remove" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $data['session_products_id'] }}">
@@ -31,10 +37,14 @@
                 
                 <div class="d-flex flex-row mx-auto bg-light">
                     <div class="p-2 align-items-center justify-content-center">
-                        <h4 class="my-1">合計</h4>
+                        <h4 class="my-1">
+                            合計
+                        </h4>
                     </div>
                     <div class="p-2 align-items-center justify-content-center">
-                        <h4 class="my-1">¥ {{ number_format($totalPrice) }} 円</h4>
+                        <h4 class="my-1">
+                            ¥ {{ number_format($totalPrice) }} 円
+                        </h4>
                     </div>
                 </div>
 
