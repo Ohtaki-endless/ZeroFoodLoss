@@ -74,9 +74,6 @@ class ProductController extends Controller
     // カート内商品表示
     public function Cartindex(Request $request)
     {
-        //渡されたセッション情報をkey（名前）を用いそれぞれ取得、変数に代入
-        $sessionUser = User::find($request->session()->get('users_id'));
-
         if ($request->session()->has('cartData')) {
             $cartData = array_values($request->session()->get('cartData'));
         }
@@ -104,7 +101,7 @@ class ProductController extends Controller
             // 合計金額の計算
             $totalPrice = array_sum(array_column($cartData, 'itemPrice'));
 
-            return view('cartlist', compact('sessionUser', 'cartData', 'totalPrice'));
+            return view('cartlist', compact('cartData', 'totalPrice'));
         } else {
             return view('no_cartlist');
         }
