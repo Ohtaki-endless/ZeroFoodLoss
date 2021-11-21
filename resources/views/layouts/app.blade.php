@@ -23,7 +23,7 @@
     
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="footerFixed">
         <!-- Navbar -->
         <header class="navbar navbar-expand-md navbar-light bg-white shadow-sm p-2">
             <div class="container">
@@ -103,44 +103,44 @@
             @yield('content')
         </main>
         
-    <!-- Footer -->
-    <footer class="text-center text-muted">
-
-        <!-- Section: Links  -->
-        <section class="border-top">
-            <div class="container text-center text-md-start mt-3">
+        <!-- Footer -->
+        <footer class="text-center text-muted w-100">
+    
+            <!-- Section: Links  -->
+            <section class="border-top">
+                <div class="container text-center text-md-start mt-3">
+                    <!-- Grid row -->
+                    
+                        <!-- Grid column -->
+                        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                          <!-- Links -->
+                          <h6 class="text-uppercase fw-bold mb-4">
+                            お問い合わせ
+                          </h6>
+                          <p>
+                            <i class="fas fa-home me-3"></i> 
+                            新潟県村上市◯◯◯
+                          </p>
+                          <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            zerofood-loss@yahoo.co.jp
+                          </p>
+                        </div>
+                        <!-- Grid column -->
+                    
                 <!-- Grid row -->
-                
-                    <!-- Grid column -->
-                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                      <!-- Links -->
-                      <h6 class="text-uppercase fw-bold mb-4">
-                        お問い合わせ
-                      </h6>
-                      <p>
-                        <i class="fas fa-home me-3"></i> 
-                        新潟県村上市◯◯◯
-                      </p>
-                      <p>
-                        <i class="fas fa-envelope me-3"></i>
-                        zerofood-loss@yahoo.co.jp
-                      </p>
-                    </div>
-                    <!-- Grid column -->
-                
-            <!-- Grid row -->
+                </div>
+            </section>
+            <!-- Section: Links  -->
+    
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                © 2021 Copyright : {{ config('app.name') }}
             </div>
-        </section>
-        <!-- Section: Links  -->
-
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2021 Copyright : {{ config('app.name') }}
-        </div>
-        <!-- Copyright -->
-        
-    </footer>
-    <!-- Footer -->
+            <!-- Copyright -->
+            
+        </footer>
+        <!-- Footer -->
     </div>
 </body>
 </html>

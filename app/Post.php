@@ -29,7 +29,7 @@ class Post extends Model
         'limit'
     ];
     
-    public function getPaginateByLimit(int $limit_count = 2)
+    public function getPaginateByLimit(int $limit_count = 6)
     {
         // created_atで作成順に並べたあと、limitで件数制限をかける
         return $this->orderBy('created_at', 'DESC')->paginate($limit_count);
