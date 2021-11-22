@@ -32,24 +32,69 @@ class UserController extends Controller
         return view('user.OrderHistory', compact('user'));
     }
     
-    // ユーザー登録情報の変更画面表示
+    // ユーザー登録情報の表示画面
     public function edit() 
     {
         $user = Auth::user();
         return view('user.edit', compact('user'));
     }
     
+    public function EditName() 
+    {
+        $user = Auth::user();
+        return view('user.EditName', compact('user'));
+    }
+    
+    public function EditEmail() 
+    {
+        $user = Auth::user();
+        return view('user.EditEmail', compact('user'));
+    }
+    
+    public function EditPassword() 
+    {
+        $user = Auth::user();
+        return view('user.EditPassword', compact('user'));
+    }
+    
+    // public function EditUser($page) 
+    // {
+    //     $user = Auth::user();
+    //     return view('user.EditPassword', compact('user'));
+    // }
+    
+    
     //ユーザー登録情報変更の保存処理
-    public function update(Request $request) 
+    public function UpdateName(Request $request) 
     {
         // 入力情報取得
-        $user_form = $request->all();
+        $form = $request['user'];
         $user = Auth::user();
         
-        //不要な「_token」の削除
-        unset($user_form['_token']);
         //保存
-        $user->fill($user_form)->save();
-        return redirect('user/index');
+        $user->fill($form)->save();
+        return redirect('user/edit');
     }
+    
+    public function UpdateEmail(Request $request) 
+    {
+        // 入力情報取得
+        $form = $request['user'];
+        $user = Auth::user();
+        
+        //保存
+        $user->fill($form)->save();
+        return redirect('user/edit');
+    }
+    
+    // public function UpdatePassword(Request $request) 
+    // {
+    //     // 入力情報取得
+    //     $form = $request['user'];
+    //     $user = Auth::user();
+        
+    //     //保存
+    //     $user->fill($form)->save();
+    //     return redirect('user/edit');
+    // }
 }

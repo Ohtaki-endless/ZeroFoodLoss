@@ -34,9 +34,14 @@ Route::group(['middleware' => 'auth'], function()
         // マイページ
         Route::get('/user/index', 'UserController@index');
         Route::get('/user/edit', 'UserController@edit');
+        Route::get('/user/edit/name', 'UserController@EditName');
+        Route::put('/user/edit/name', 'UserController@UpdateName');
+        Route::get('/user/edit/email', 'UserController@EditEmail');
+        Route::put('/user/edit/email', 'UserController@UpdateEmail');
+        // Route::get('/user/edit/password', 'UserController@EditPassword');
+        // Route::put('/user/edit/password', 'UserController@UpdatePassword');
         Route::get('/user/likes', 'UserController@likes');
         Route::get('/user/order-history', 'UserController@OrderHistory');
-        Route::post('/user/edit', 'UserController@update');
         
         // カート機能
         Route::get('/cartindex','ProductController@Cartindex');

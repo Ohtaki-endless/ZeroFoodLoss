@@ -11,12 +11,6 @@ class SampleUser extends Seeder
      */
     public function run()
     {
-        $param = [
-            'name' => '管理者',
-            'email' => 'orora_togiants@yahoo.co.jp',
-            'password' => bcrypt('password'),
-            'role' => 1,
-        ];
-        DB::table('users')->insert($param);
+        
     }
 }
