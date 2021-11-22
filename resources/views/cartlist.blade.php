@@ -24,6 +24,7 @@
                             <h5>
                                 小計 ¥ {{ number_format($data['session_quantity'] * $data['price']) }}円
                             </h5>
+                            <!--削除ボタン-->
                             <form action="/cartindex/{{ $data['session_products_id'] }}/remove" method="POST">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $data['session_products_id'] }}">

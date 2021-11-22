@@ -14,15 +14,17 @@ use App\Mail\Thanks;
 class ProductController extends Controller
 {
     // 商品詳細からカートに追加
-    public function addCart(Request $request)
+    public function addCart(Request $request, Post $post)
     {
-        //変数の初期化
         $cartData = [];
         
         //商品詳細画面のhidden属性で送信された商品IDと注文個数を取得し配列として変数に格納
         $cartData = [
-            'session_products_id' => $request->products_id, 
+            'session_products_id' => $post->id, 
             'session_quantity' => $request->product_quantity, 
+            'product_name' => $post->title,
+            'price' => $post->price,
+            'product_image' => $post->image_path,
         ];
         
         // DBの商品個数更新
@@ -65,7 +67,7 @@ class ProductController extends Controller
             }
         }
         $request->session()->put('users_id', ($request->users_id));
-        
+        // dd($request);
         return redirect('/cartindex');
     }
     
@@ -79,45 +81,15 @@ class ProductController extends Controller
         }
         
         if (!empty($cartData)) {
-            // 商品IDのみ配列に代入
-            $sessionProductsId = array_column($cartData, 'session_products_id');
-            // 配列の商品IDを「,」で連結する
-            $sessionProductsId_order = implode(',', $sessionProductsId);
-            
-            
-            // $placeholder = '';
-            // foreach ($sessionProductsId as $key => $value) {
-            //     $placeholder .= ($key == 0) ? '?' : ',?';
-            // }
-            
-            
-            $product = Post::whereIn('id', $sessionProductsId)->get();
-            // dd($product);
-            // postsテーブルから商品IDのデータを取得する。しかし昇順に取得するため、「orderByRaw」で商品を追加した順に並び替える
-            // FIELDメソッドは、第一引数に並び替え対象のカラム、第二引数に並び替えたい順番を書く
-            // $product = Post::whereIn('id', $sessionProductsId)->orderByRaw("FIELD(id, $sessionProductsId_order)")->get();
-            // dd($product);
-            // ->orderByRaw("FIELD(id, $sessionProductsId_order)")->get();
-            
-            
-            
-            
-            
-            
-            
             foreach ($cartData as $index => &$data) {
-                //二次元目の配列を指定している$dataに'product〜'key生成 Modelオブジェクト内の各カラムを代入
-                //＆で参照渡し 仮引数($data)の変更で実引数($cartData)を更新する
-                $data['product_name'] = $product[$index]->title;
-                $data['price'] = $product[$index]->price;
-                $data['product_image'] = $product[$index]->image_path;
                 //商品小計
                 $data['itemPrice'] = $data['price'] * $data['session_quantity'];
             }
             unset($data);
+            
             // 合計金額の計算
             $totalPrice = array_sum(array_column($cartData, 'itemPrice'));
-
+        
             return view('cartlist', compact('cartData', 'totalPrice'));
         } else {
             return view('no_cartlist');
@@ -131,8 +103,11 @@ class ProductController extends Controller
     {
         $sessionCartData = $request->session()->get('cartData');
 
+        // 削除する商品IDの値を数値変換
+        $id = (int)$request->product_id;
+
         foreach ($sessionCartData as $index => $sessionData) {
-            if ($sessionData['session_products_id'] === $request->product_id ){
+            if ($sessionData['session_products_id'] === $id ){
                 // DBの商品個数更新
                 $post = Post::find($sessionData['session_products_id']);
                 $quantity_result = $post->quantity + $sessionData['session_quantity'];
