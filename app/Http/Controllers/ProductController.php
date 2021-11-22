@@ -85,13 +85,13 @@ class ProductController extends Controller
             $sessionProductsId_order = implode(',', $sessionProductsId);
             
             
-            $placeholder = '';
-            foreach ($sessionProductsId as $key => $value) {
-                $placeholder .= ($key == 0) ? '?' : ',?';
-            }
+            // $placeholder = '';
+            // foreach ($sessionProductsId as $key => $value) {
+            //     $placeholder .= ($key == 0) ? '?' : ',?';
+            // }
             
             
-            $product = Post::whereIn('id', $sessionProductsId)->orderByRaw("FIELD(id, $placeholder)", $sessionProductsId)->get();
+            $product = Post::whereIn('id', $sessionProductsId)->get();
             // dd($product);
             // postsテーブルから商品IDのデータを取得する。しかし昇順に取得するため、「orderByRaw」で商品を追加した順に並び替える
             // FIELDメソッドは、第一引数に並び替え対象のカラム、第二引数に並び替えたい順番を書く
