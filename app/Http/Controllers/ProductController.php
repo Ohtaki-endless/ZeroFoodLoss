@@ -165,12 +165,12 @@ class ProductController extends Controller
         $request->session()->forget('cartData');
 
         // メール送信処理
-        // $order->load('orderdetails.post');
-        // $user = Auth::user();
-        // $mail_data['user']=$user->name;
-        // $mail_data['order']=$order;
-        // Mail::to($user->email)->send(new Thanks($mail_data));
-        // Mail::to(config('mail.username'))->send(new Thanks($mail_data));
+        $order->load('orderdetails.post');
+        $user = Auth::user();
+        $mail_data['user']=$user->name;
+        $mail_data['order']=$order;
+        Mail::to($user->email)->send(new Thanks($mail_data));
+        Mail::to(config('mail.username'))->send(new Thanks($mail_data));
         
         return view('ReserveCompleted', compact('order'));
     }
