@@ -86,7 +86,7 @@ class ProductController extends Controller
             
             // postsテーブルから商品IDのデータを取得する。しかし昇順に取得するため、「orderByRaw」で商品を追加した順に並び替える
             // FIELDメソッドは、第一引数に並び替え対象のカラム、第二引数に並び替えたい順番を書く
-            $product = Post::whereIn('id', $sessionProductsId)->orderByRaw("FIELD(id, $sessionProductsId_order)")->get();
+            // $product = Post::whereIn('id', $sessionProductsId)->orderByRaw("FIELD(id, $sessionProductsId_order)")->get();
             
             foreach ($cartData as $index => &$data) {
                 //二次元目の配列を指定している$dataに'product〜'key生成 Modelオブジェクト内の各カラムを代入
