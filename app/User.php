@@ -36,7 +36,7 @@ class User extends Authenticatable
     
     // ユーザー登録情報変更のバリデーション
     public static $editNameRules = array(
-        'name' => 'required|max:255|string'
+        'name' => 'required|max:50|string'
     );
 
     public static $editEmailRules = array(

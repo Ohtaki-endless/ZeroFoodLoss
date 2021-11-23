@@ -21,7 +21,7 @@
                         <label for="name" class="h5">
                             ユーザー名
                         </label>
-                        <div class="card-text h5">
+                        <div class="card-text h5 font-weight-bold">
                             {{ $user->name }}
                         </div>
                         <a href="{{ route('user.edit', 'name') }}" class="card-link btn btn-primary btn-sm">
@@ -33,9 +33,12 @@
                         <label for="email" class="h5">
                             メールアドレス
                         </label>
-                        <div class="card-text h5">
+                        <div class="card-text h5 font-weight-bold">
                             {{ $user->email }}
                         </div>
+                        <p>
+                            ※ Googleログインをご利用の方は変更しないでください
+                        </p>
                         <a href="{{ route('user.edit', 'email') }}" class="card-link btn btn-primary btn-sm">
                             編集
                         </a>

@@ -34,6 +34,9 @@
                                 メールアドレス
                             </label>
                             <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}" name="email">
+                            <p>
+                                ※ Googleログインをご利用の方は変更しないでください。
+                            </p>
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

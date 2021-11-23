@@ -20,7 +20,7 @@
                     カート内に商品はありません
                 </div>
                 <div class="card-body">
-                    <a href="/" class="card-link">
+                    <a href="/" class="card-link btn btn-outline-secondary">
                         戻る
                     </a>
                 </div>

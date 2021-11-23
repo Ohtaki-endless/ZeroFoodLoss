@@ -45,14 +45,14 @@
                         <!-- Authentication Links -->
                         @guest
                             <div class="d-flex align-items-center">
-                                <li class="nav-item">
-                                    <a class="btn btn-light rounded-pill px-3 me-2" href="{{ route('login') }}">
+                                <li class="nav-item pr-2">
+                                    <a class="btn btn-light rounded-pill px-3 me-2 btn-lg" href="{{ route('login') }}">
                                         {{ __('Login') }}
                                     </a>
                                 </li>
                                 @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-light rounded-pill me-3" href="{{ route('register') }}">
+                                    <a class="btn btn-light rounded-pill me-3 btn-lg" href="{{ route('register') }}">
                                         {{ __('Register') }}
                                     </a>
                                 </li>
@@ -60,6 +60,10 @@
                             </div>
                         @else
                             <div class="d-flex align-items-center">
+                                <li class="nav-item pt-3 pr-4">
+                                    <p class="text-dark">{{ auth()->user()->name }} さんようこそ！</p>
+                                </li>
+                                
                                 <!-- カート -->
                                 <li class="nav-item pr-4 pt-3">
                                     <a class="nav-link btn-default" href="/cartindex">
