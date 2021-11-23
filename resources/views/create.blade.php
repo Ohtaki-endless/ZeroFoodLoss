@@ -41,7 +41,9 @@
                         </div>
                         
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">商品画像</label>
+                            <label for="exampleFormControlTextarea1" class="form-label">
+                                商品画像
+                            </label>
                             <input type="file" name="image">
                             <p class="image__error" style="color:red">{{ $errors->first('post.image') }}</p>
                         </div>    

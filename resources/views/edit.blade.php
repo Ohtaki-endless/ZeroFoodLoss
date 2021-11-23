@@ -8,7 +8,7 @@
                 <div class="card-header h5">編集</div>
 
                 <div class="card-body">
-                    <form action="/posts/{{ $post->id }}" method="POST">
+                    <form action="/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         
@@ -59,7 +59,7 @@
                             <label for="exampleFormControlTextarea1" class="form-label h5">
                                 商品画像
                             </label>
-                            <input type="file" name="image" value="{{ $post->image_path }}">
+                            <input type="file" name="image" value="">
                             <p class="image__error" style="color:red">{{ $errors->first('post.image') }}</p>
                         </div>
                         

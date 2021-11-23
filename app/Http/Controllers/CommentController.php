@@ -12,7 +12,7 @@ class CommentController extends Controller
     // コメント投稿処理
     public function store(Comment $comment, CommentRequest $request, Post $post)
     {
-        $input = $request['comment'];
+        $input = $request->all();
         $input += ['user_id' => $request->user()->id];
         $input += ['post_id' => $post->id];
         $comment->fill($input)->save();

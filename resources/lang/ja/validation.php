@@ -149,7 +149,7 @@ return [
         'name' => 'ユーザー名',
         'email' => 'メールアドレス',
 	'password' => 'パスワード',
-	'comment.comment' => 'コメント',
+	'comment' => 'コメント',
 	'post.title' => '商品名',
 	'post.body' => '商品説明',
 	'post.price' => '値段',

@@ -47,8 +47,7 @@ class PostController extends Controller
             $post->image_path = Storage::disk('s3')->url($path);
         }
         
-        $post->fill($input);
-        $post->save();
+        $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }
     
@@ -61,8 +60,17 @@ class PostController extends Controller
     // 編集実行処理
     public function update(PostRequest $request, Post $post)
     {
-        $input_post = $request['post'];
-        $post->fill($input_post)->save();
+        $input = $request['post'];
+        
+        if($request->file('image')){
+            // バケットへアップロード
+            $image = $request->file('image');
+            $path = Storage::disk('s3')->putFile('/', $image, 'public');
+            // アップロードした画像のパスを取得
+            $post->image_path = Storage::disk('s3')->url($path);
+        }
+        
+        $post->fill($input)->save();
         return redirect('/posts/' . $post->id);
     }
     

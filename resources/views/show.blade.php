@@ -159,9 +159,9 @@
                     <form action="/{{ $post->id }}/comments" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <textarea class="form-control" name="comment[comment]" placeholder="コメントを入力">{{ old('comment.body') }}</textarea>
-                            <p class="comment__error" style="color:red">{{ $errors->first('comment.comment') }}</p>
+                            <input class="form-control @error('comment') is-invalid @enderror" name="comment" placeholder="コメントを入力">{{ old('comment.body') }}</input>
                         </div>
+                        <p class="comment__error" style="color:red">{{ $errors->first('comment') }}</p>
                         <input class="btn btn-secondary rounded-pill" type="submit" value="投稿">
                     </form>
                 </div>
