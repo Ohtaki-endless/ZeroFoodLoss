@@ -16,6 +16,9 @@ class CommentController extends Controller
         $input += ['user_id' => $request->user()->id];
         $input += ['post_id' => $post->id];
         $comment->fill($input)->save();
+        
+        // フラッシュメッセージの追加
+        session()->flash('flash_message', 'コメントを投稿しました！');
         return back();
     }
     

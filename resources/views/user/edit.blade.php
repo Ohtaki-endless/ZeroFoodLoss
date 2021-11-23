@@ -4,11 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            
+            <!--フラッシュメッセージ-->
+            @if (session('flash_message'))
+                <div class="alert alert-primary" role="alert">
+                    {{ session('flash_message') }}
+                </div>
+            @endif
+                
             <div class="card">
                 <div class="card-header h5">
                     ユーザー登録内容の変更
                 </div>
-                
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name" class="h5">
@@ -17,7 +24,7 @@
                         <div class="card-text h5">
                             {{ $user->name }}
                         </div>
-                        <a href="/user/edit/name" class="card-link btn btn-primary btn-sm">
+                        <a href="{{ route('user.edit', 'name') }}" class="card-link btn btn-primary btn-sm">
                             編集
                         </a>
                     </div>
@@ -29,22 +36,22 @@
                         <div class="card-text h5">
                             {{ $user->email }}
                         </div>
-                        <a href="/user/edit/email" class="card-link btn btn-primary btn-sm">
+                        <a href="{{ route('user.edit', 'email') }}" class="card-link btn btn-primary btn-sm">
                             編集
                         </a>
                     </div>
-                    <!--<hr>-->
-                    <!--<div class="form-group">-->
-                    <!--    <label for="password" class="h5">-->
-                    <!--        パスワード-->
-                    <!--    </label>-->
-                    <!--    <div class="card-text">-->
-                    <!--        安全のため非表示です-->
-                    <!--    </div>-->
-                    <!--    <a href="/user/edit/password" class="card-link btn btn-primary btn-sm">-->
-                    <!--        編集-->
-                    <!--    </a>-->
-                    <!--</div>-->
+                    <hr>
+                    <div class="form-group">
+                        <label for="password" class="h5">
+                            パスワード
+                        </label>
+                        <div class="card-text">
+                            安全のため非表示です
+                        </div>
+                        <a href="{{ route('user.edit', 'password') }}" class="card-link btn btn-primary btn-sm">
+                            編集
+                        </a>
+                    </div>
                 </div>
                 
                 <div class="card-body">

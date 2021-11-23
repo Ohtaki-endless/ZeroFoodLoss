@@ -19,27 +19,23 @@ Route::get('/', 'PostController@index');
 
 // 管理者のみアクセス可 (商品の新規投稿、編集。削除)
 Route::middleware(['auth','can:isAdmin'])->group(function()
-   {
+    {
         Route::get('/posts/create', 'PostController@create');
         Route::get('/posts/{post}/role', 'PostController@role');
         Route::get('/posts/{post}/edit', 'PostController@edit');
         Route::put('/posts/{post}', 'PostController@update');
         Route::delete('/posts/{post}', 'PostController@delete');
         Route::post('/posts', 'PostController@store');
-   });
+    });
     
 
 Route::group(['middleware' => 'auth'], function()
-   {  
+    {  
         // マイページ
         Route::get('/user/index', 'UserController@index');
-        Route::get('/user/edit', 'UserController@edit');
-        Route::get('/user/edit/name', 'UserController@EditName');
-        Route::put('/user/edit/name', 'UserController@UpdateName');
-        Route::get('/user/edit/email', 'UserController@EditEmail');
-        Route::put('/user/edit/email', 'UserController@UpdateEmail');
-        // Route::get('/user/edit/password', 'UserController@EditPassword');
-        // Route::put('/user/edit/password', 'UserController@UpdatePassword');
+        Route::get('/user/edit', 'UserController@UserEdit');
+        Route::get('/user/edit/{page}', 'UserController@edit')->name('user.edit');
+        Route::put('/user/edit/{page}', 'UserController@update');
         Route::get('/user/likes', 'UserController@likes');
         Route::get('/user/order-history', 'UserController@OrderHistory');
         
@@ -60,7 +56,7 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('/{post}/likes', 'LikeController@like');
         Route::get('/{post}/unlikes', 'LikeController@unlike');
         Route::get('/{post}/likes/users', 'LikeController@likeusers');
-   });
+    });
 
 // Google Login
 Route::get('login/google', 'Auth\LoginController@redirectToGoogle');

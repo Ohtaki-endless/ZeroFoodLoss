@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            
+            <!--フラッシュメッセージ-->
+            @if (session('flash_message'))
+                <div class="alert alert-primary" role="alert">
+                    {{ session('flash_message') }}
+                </div>
+            @endif
+            
             <div class="card">
                 
                 <!--管理者のみ表示-->
@@ -28,6 +36,7 @@
                         <div class="col-lg-6">
                             <img class="mx-auto d-block" src="{{ $post->image_path }}" width="280" height="280">
                             
+                            <!--いいねボタン-->
                             <div class="card-body mx-auto">
                                 @if($post->users()->where('user_id', Auth::id())->exists())
                                 	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm rounded-pill">
@@ -51,6 +60,7 @@
                                     </a>
                                 @endcan
                             </div>
+                            <!--いいねボタン終-->
                         </div>
                         
                         <div class="col-lg-6 pt-2">
@@ -160,6 +170,8 @@
                     <div class='card-text'>
                         {{ $comment->comment }}
                     </div>
+                    
+                    <!--削除ボタン-->
                     @can('isAdmin')
                     <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
                         @csrf
@@ -167,6 +179,7 @@
                         <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除">
                     </form>
                     @endcan
+                    
                 </div>
             </div>
             @endforeach
