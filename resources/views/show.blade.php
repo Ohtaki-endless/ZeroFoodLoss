@@ -74,6 +74,7 @@
                                 ¥ {{ number_format($post->price) }}
                             </h3>
                             
+                            <!--販売中の表示-->
                             @if($post->role == 1)
                             <div id="sale">
                                 <h5 class="font-weight-bold pt-2">
@@ -119,16 +120,22 @@
                                     こちらの商品は、購入期限切れとなりました。
                                 </p>
                             </div>
+                            <!--販売中の表示終-->
+                            
                             @else
-                                <h4 class="card-text">
-                                    <span class="text-white badge rounded-pill bg-secondary">
-                                        売り切れ
-                                    </span>
-                                </h4>
-                                <p class="card-text">
-                                    申し訳ございません。<br>
-                                    こちらの商品は、売り切れとなりました。
-                                </p>
+                            
+                            <!--売切中の表示-->
+                            <h4 class="card-text">
+                                <span class="text-white badge rounded-pill bg-secondary">
+                                    売り切れ
+                                </span>
+                            </h4>
+                            <p class="card-text">
+                                申し訳ございません。<br>
+                                こちらの商品は、売り切れとなりました。
+                            </p>
+                            <!--売切中の表示終-->
+                            
                             @endif
                         </div>
                     </div>
@@ -142,6 +149,7 @@
             </div>
         </div>
         
+        <!--コメント投稿フォーム-->
         <div class="col-md-8 pt-3">
             <div class="card">
                 <div class="card-header">
@@ -159,7 +167,9 @@
                 </div>
             </div>
         </div>
+        <!--コメント投稿フォーム終-->
             
+        <!--コメント表示-->
         <div class="col-md-8">
             @foreach ($post->comments as $comment)
             <div class="card">
@@ -167,16 +177,25 @@
                     <div class='card-text' style='font-weight:  bold;'>
                         投稿者：{{ $comment->user->name }}
                     </div>
-                    <div class='card-text'>
+                    <div class='card-text pt-2'>
                         {{ $comment->comment }}
                     </div>
                     
-                    <!--削除ボタン-->
+                    <!--削除ボタン（投稿したユーザーのみ表示-->
+                    @if(auth()->user()->name === $comment->user->name)
+                    <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除" class="btn btn-secondary rounded-pill btn-sm">
+                    </form>
+                    @endcan
+                    
+                    <!--管理者用削除ボタン-->
                     @can('isAdmin')
                     <form action="/{{ $comment->id }}/comments" id="comment_{{ $comment->id }}_delete" method="post" style="display:inline">
                         @csrf
                         @method('DELETE')
-                        <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除">
+                        <input type="button" data-id="{{ $comment->id }}" onclick="deleteComment(this);" value="削除" class="btn btn-secondary rounded-pill btn-sm">
                     </form>
                     @endcan
                     
@@ -184,6 +203,8 @@
             </div>
             @endforeach
         </div>
+        <!--コメント表示終-->
+        
     </div>
 </div>
 <script>const goal = @json($limit)</script>

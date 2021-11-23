@@ -17,8 +17,7 @@ class ProductController extends Controller
     public function addCart(Request $request, Post $post)
     {
         $cartData = [];
-        
-        //商品詳細画面のhidden属性で送信された商品IDと注文個数を取得し配列として変数に格納
+        //送信された情報を取得
         $cartData = [
             'session_products_id' => $post->id, 
             'session_quantity' => $request->product_quantity, 
@@ -67,7 +66,8 @@ class ProductController extends Controller
             }
         }
         $request->session()->put('users_id', ($request->users_id));
-        // dd($request);
+        // フラッシュメッセージの追加
+        session()->flash('flash_message', 'カートに商品を追加しました！');
         return redirect('/cartindex');
     }
     
@@ -122,11 +122,14 @@ class ProductController extends Controller
         }
         // session再取得
         $cartData = $request->session()->get('cartData');
+        // フラッシュメッセージの追加
+        session()->flash('flash_message', 'カートから商品を削除しました！');
+        
         //session情報があればtrue
         if ($request->session()->has('cartData')) {
             return redirect('/cartindex');
         }
-
+        
         return view('no_cartlist', ['user' => Auth::user()]);
     }
     

@@ -4,6 +4,25 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            
+            <!--フラッシュメッセージ-->
+            @if (session('flash_message'))
+            
+                <!--商品の削除は赤いデザイン-->
+                @if (session('flash_message') === 'カートから商品を削除しました！')
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('flash_message') }}
+                    </div>
+                    
+                <!--商品の追加は青いデザイン-->
+                @elseif (session('flash_message') === 'カートに商品を追加しました！')
+                    <div class="alert alert-primary" role="alert">
+                        {{ session('flash_message') }}
+                    </div>
+                @endif
+                
+            @endif
+            
             <div class="card">
                 <h5 class="card-header">カート内容</h5>
                 
