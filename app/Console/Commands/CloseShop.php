@@ -13,7 +13,7 @@ class CloseShop extends Command
      *
      * @var string
      */
-    protected $signature = 'closeshop';
+    protected $signature = 'command:closeshop';
 
     /**
      * The console command description.
