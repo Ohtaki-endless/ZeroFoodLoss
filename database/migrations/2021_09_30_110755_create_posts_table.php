@@ -22,6 +22,7 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('quantity');
             $table->datetime('limit');
             $table->tinyInteger('role')->default(1);
+            $table->unsignedBigInteger('access')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

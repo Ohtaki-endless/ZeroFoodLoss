@@ -17,9 +17,22 @@ class PostController extends Controller
         return view('index')->with(['posts' => $post->getPaginateByLimit()]);
     }
     
+    
+    public function order(Post $post, $order)
+    {
+        $post = new Post;
+        // Postモデルorderメソッド呼び出し
+        $posts = $post->order($order);
+        return view('index', compact('posts', 'order'));
+    }
+    
+    
     // 投稿詳細画面
     public function show(Post $post)
     {
+        // ページアクセス数の更新
+        $post->AccessCounter($post->id);
+        
         $post->load('comments.user');
         // strtotimeメソッドでタイムスタンプに変換
         $limit = strtotime($post->limit);
@@ -27,11 +40,13 @@ class PostController extends Controller
         return view('show', compact('post' , 'limit'));
     }
     
+    
     // 新規投稿画面表示
     public function create()
     {
         return view('create');
     }
+    
     
     // 新規投稿実行処理
     public function store(Post $post, PostRequest $request)
@@ -51,11 +66,13 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
     
+    
     // 編集画面表示処理
     public function edit(Post $post)
     {
         return view('edit')->with(['post' => $post]);
     }
+    
     
     // 編集実行処理
     public function update(PostRequest $request, Post $post)
@@ -74,12 +91,14 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
     
+    
     // 削除処理（論理削除）
     public function delete(Post $post)
     {
         $post->delete();
         return redirect('/');
     }
+    
     
     // ロールの切り替え処理
     public function role(Post $post)

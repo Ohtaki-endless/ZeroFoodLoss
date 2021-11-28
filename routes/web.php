@@ -16,6 +16,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // 商品一覧
 Route::get('/', 'PostController@index');
+Route::get('/order/{order}', 'PostController@order')->name('order');
 
 // 管理者のみアクセス可 (商品の新規投稿、編集。削除)
 Route::middleware(['auth','can:isAdmin'])->group(function()

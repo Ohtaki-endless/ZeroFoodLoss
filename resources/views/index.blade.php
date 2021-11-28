@@ -9,6 +9,15 @@
             <a href='/posts/create' class="btn btn-primary btn-lg">商品新規登録</a>
             @endcan
             
+            <select onChange="location.href=value;">
+                <option value="{{ route('order', 'new')}}" {{  empty($order) || $order === 'new' ? 'selected': '' }}>
+                    新しい順
+                </option>
+                <option value="{{ route('order', 'access')}}" {{ isset($order) && $order === 'access' ? 'selected': '' }}>
+                    アクセス数順
+                </option>
+            </select>
+            
             <div class="row">
                 @foreach ($posts as $post)
                 <div class="col-lg-6 pt-4">
