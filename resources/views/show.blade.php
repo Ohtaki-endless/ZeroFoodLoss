@@ -37,30 +37,37 @@
                             <img class="mx-auto d-block" src="{{ $post->image_path }}" width="280" height="280">
                             
                             <!--いいねボタン-->
-                            <div class="card-body mx-auto">
-                                @if($post->users()->where('user_id', Auth::id())->exists())
-                                	<a href="/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm rounded-pill">
-                                		いいね
-                                		<span class="badge">
-                                			{{ $post->users()->count() }}
-                                		</span>
-                                	</a>
-                                @else
-                                	<a href="/{{ $post->id }}/likes" class="btn btn-outline-danger btn-sm rounded-pill">
-                                		いいね
-                                		<span class="badge">
-                                			{{ $post->users()->count() }}
-                                		</span>
-                                	</a>
-                                @endif
+                            <!--<div class="card-body mx-auto">-->
+                            <!--    @if($post->users()->where('user_id', Auth::id())->exists())-->
+                            <!--    	<a href="/posts/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm rounded-pill">-->
+                            <!--    		いいね-->
+                            <!--    		<span class="badge">-->
+                            <!--    			{{ $post->users()->count() }}-->
+                            <!--    		</span>-->
+                            <!--    	</a>-->
+                            <!--    @else-->
+                            <!--    	<a href="/posts/{{ $post->id }}/likes" class="btn btn-outline-danger btn-sm rounded-pill">-->
+                            <!--    		いいね-->
+                            <!--    		<span class="badge">-->
+                            <!--    			{{ $post->users()->count() }}-->
+                            <!--    		</span>-->
+                            <!--    	</a>-->
+                            <!--    @endif-->
                                 
-                                @can('isAdmin')
-                                    <a href="/{{ $post->id }}/likes/users" class="btn btn-secondary btn-sm">
-                                	    いいねしたユーザー
-                                    </a>
-                                @endcan
-                            </div>
+                            <!--    @can('isAdmin')-->
+                            <!--        <a href="/posts/{{ $post->id }}/likesusers" class="btn btn-secondary btn-sm">-->
+                            <!--    	    いいねしたユーザー-->
+                            <!--        </a>-->
+                            <!--    @endcan-->
+                            <!--</div>-->
                             <!--いいねボタン終-->
+                            
+                            <div class="card-body mx-auto">
+                                <like-component
+                                    :post="{{ json_encode($post)}}"
+                                ></like-component>
+                            </div>
+                            
                         </div>
                         
                         <div class="col-lg-6 pt-2">

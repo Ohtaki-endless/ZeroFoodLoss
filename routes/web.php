@@ -54,9 +54,12 @@ Route::group(['middleware' => 'auth'], function()
         Route::delete('/{comment}/comments', 'CommentController@delete');
         
         // いいね機能
-        Route::get('/{post}/likes', 'LikeController@like');
-        Route::get('/{post}/unlikes', 'LikeController@unlike');
-        Route::get('/{post}/likes/users', 'LikeController@likeusers');
+        Route::get('/posts/{post}/favorites', 'LikeController@store');
+        Route::get('/posts/{post}/unfavorites', 'LikeController@destroy');
+        Route::get('/posts/{post}/countfavorites', 'LikeController@count');
+        Route::get('/posts/{post}/hasfavorites', 'LikeController@hasfavorite');
+        
+        Route::get('/posts/{post}/likesusers', 'LikeController@likeusers');
     });
 
 // Google Login

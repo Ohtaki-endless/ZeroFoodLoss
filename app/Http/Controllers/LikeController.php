@@ -8,15 +8,45 @@ use Auth;
 class LikeController extends Controller
 {
     // いいね処理
-    public function like(Post $post){
+    public function store(Post $post)
+    {
         $post->users()->attach(Auth::id());
-        return back();
+        $count = $post->users()->count(); 
+        $result = true;
+        return response()->json([
+            'result' => $result, 
+            'count' => $count,  
+        ]);
     }
     
-    // いいね取り消し処理
-    public function unlike(Post $post){
+    // いいねの取り消し
+    public function destroy(Post $post)
+    {
         $post->users()->detach(Auth::id());
-        return back();
+        $count = $post->users()->count();
+        $result = false;
+        return response()->json([
+            'result' => $result, 
+            'count' => $count, 
+        ]);
+    }
+    
+    // いいね数のカウント
+    public function count(Post $post)
+    {
+        $count = $post->users()->count();
+        return response()->json($count);
+    }
+    
+    // いいねしているか否か判別
+    public function hasfavorite(Post $post)
+    {
+        if ($post->users()->where('user_id', Auth::id())->exists()) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return response()->json($result);
     }
     
     // いいねしたユーザー一覧表示
