@@ -14,6 +14,7 @@
         </div>
     </div>
 </template>
+
 <script>
 /*global axios*/
     export default {
