@@ -6482,8 +6482,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /*global axios*/
-
-/*global LikeComponent*/
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['post'],
   data: function data() {
