@@ -10,7 +10,6 @@
             <a href='/posts/create' class="btn btn-primary btn-lg">商品新規登録</a>
             @endcan
             
-            <!--並べ替え選択ボタン-->
             <select onChange="location.href=value;">
                 <option value="{{ route('order', 'new')}}" {{  empty($order) || $order === 'new' ? 'selected': '' }}>
                     新しい順
