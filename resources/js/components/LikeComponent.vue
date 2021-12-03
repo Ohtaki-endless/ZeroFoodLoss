@@ -18,6 +18,11 @@
 /*global axios*/
 /*global LikeComponent*/
     export default {
+        name: 'LikeComponent',
+        components: {
+            'like-component': LikeComponent
+        },
+          
         props: ['post'],
         
         data() {
