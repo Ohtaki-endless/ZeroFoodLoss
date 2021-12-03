@@ -5,8 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             
-            <a href='/index1' class="btn">商品</a>
-            
             @can('isAdmin')
             <a href='/posts/create' class="btn btn-primary btn-lg">商品新規登録</a>
             @endcan

@@ -18,13 +18,6 @@ class UserController extends Controller
         return view('user.index');
     }
     
-    public function index1()
-    {
-        $user = Auth::user();
-        $user->where('id', $user->id)->update(['role' => 1]);
-        return back();
-    }
-    
     // いいねした商品一覧表示
     public function likes()
     {

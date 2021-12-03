@@ -13,7 +13,7 @@
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/index1', 'UserController@index1');
+
 // 商品一覧
 Route::get('/', 'PostController@index');
 Route::get('/order/{order}', 'PostController@order')->name('order');
