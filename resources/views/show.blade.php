@@ -63,9 +63,7 @@
                             <!--いいねボタン終-->
                             
                             <div class="card-body mx-auto">
-                                <like-component
-                                    :post="{{ json_encode($post)}}"
-                                ></like-component>
+                                <like-component :post="{{ json_encode($post)}}"></like-component>
                             </div>
                             
                         </div>
