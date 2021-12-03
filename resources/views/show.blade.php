@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <example-component :post="{{ json_encode($post)}}"></example-component>
+            
             <!--フラッシュメッセージ-->
             @if (session('flash_message'))
                 <div class="alert alert-primary" role="alert">
@@ -63,9 +63,9 @@
                             <!--いいねボタン終-->
                             
                             <!--いいねボタンVue.js-->
-                            <!--<div class="card-body mx-auto">-->
-                            <!--    <like-component :post="{{ json_encode($post)}}"></like-component>-->
-                            <!--</div>-->
+                            <div class="card-body mx-auto">
+                                <like-component :post="{{ json_encode($post)}}"></like-component>
+                            </div>
                             
                         </div>
                         
