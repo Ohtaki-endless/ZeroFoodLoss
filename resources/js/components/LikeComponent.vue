@@ -16,6 +16,7 @@
 </template>
 <script>
 /*global axios*/
+/*global LikeComponent*/
     export default {
         props: ['post'],
         
