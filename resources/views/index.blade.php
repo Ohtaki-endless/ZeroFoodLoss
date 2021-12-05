@@ -21,7 +21,7 @@
             
             <div class="row">
                 @foreach ($posts as $post)
-                <div class="col-lg-6 pt-4">
+                <div class="col-md-6 pt-4">
                     <div class="card">
                         <div class="card-body text-center">
                             <div class='card-text'>

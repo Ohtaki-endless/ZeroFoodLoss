@@ -33,72 +33,129 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+                
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <div class="d-flex align-items-center">
-                                <li class="nav-item pr-2">
-                                    <a class="btn btn-light rounded-pill px-3 me-2 btn-lg" href="{{ route('login') }}">
-                                        {{ __('Login') }}
-                                    </a>
-                                </li>
-                                @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="btn btn-light rounded-pill me-3 btn-lg" href="{{ route('register') }}">
-                                        {{ __('Register') }}
-                                    </a>
-                                </li>
-                                @endif
-                            </div>
-                        @else
-                            <div class="d-flex align-items-center">
-                                <li class="nav-item pt-3 pr-4">
-                                    <p class="text-dark">{{ auth()->user()->name }} さんようこそ！</p>
-                                </li>
-                                
-                                <!-- カート -->
-                                <li class="nav-item pr-4 pt-3">
-                                    <a class="nav-link btn-default" href="/cartindex">
-                                        <i class="fas fa-shopping-cart fa-2x"></i>
-                                        @if(session('cartData'))
-                                            <span class="badge badge-primary rounded-pill badge-dot badge-notify">
-                                                {{ count(session('cartData')) }}
-                                            </span>
-                                        @endif
-                                        <p>カート</p>
-                                    </a>
-                                </li>
-                                
-                                <li class="nav-item pt-3">
-                                    <a class="nav-link btn-default text-center" href="/user/index">
-                                        <i class="fas fa-user fa-2x"></i>
-                                        <p>マイページ</p>
-                                    </a>
-                                </li>
-                                
-                                <li class="nav-item pl-3">
-                                    <a class="btn btn-light rounded-pill pl-3" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('ログアウト') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </div>
-                            
-                        @endguest
-                    </ul>
+                    
+                    <!--PC画面サイズでの表示-->
+                    <div class="d-none d-sm-block">
+                        <ul class="navbar-nav ml-auto">
+                            @guest
+                                <div class="d-flex align-items-center">
+                                    <li class="nav-item pr-2">
+                                        <a class="btn btn-light rounded-pill px-3 me-2 btn-lg" href="{{ route('login') }}">
+                                            {{ __('Login') }}
+                                        </a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="btn btn-light rounded-pill me-3 btn-lg" href="{{ route('register') }}">
+                                            {{ __('Register') }}
+                                        </a>
+                                    </li>
+                                    @endif
+                                </div>
+                            @else
+                                <div class="d-flex align-items-center">
+                                    <li class="nav-item pt-3 pr-4">
+                                        <p class="text-dark">{{ auth()->user()->name }} さんようこそ！</p>
+                                    </li>
+                                    
+                                    <!-- カート -->
+                                    <li class="nav-item pr-4 pt-3">
+                                        <a class="nav-link btn-default" href="/cartindex">
+                                            <i class="fas fa-shopping-cart fa-2x"></i>
+                                            @if(session('cartData'))
+                                                <span class="badge badge-primary rounded-pill badge-dot badge-notify">
+                                                    {{ count(session('cartData')) }}
+                                                </span>
+                                            @endif
+                                            <p>カート</p>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item pt-3">
+                                        <a class="nav-link btn-default text-center" href="/user/index">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <p>マイページ</p>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item pl-3">
+                                        <a class="btn btn-light rounded-pill pl-3" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('ログアウト') }}
+                                        </a>
+                                        
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </div>
+                            @endguest
+                        </ul>
+                    </div>
+                    
+                    <!--スマートフォン画面サイズでの表示-->
+                    <div class="d-block d-sm-none">
+                        <ul class="navbar-nav ml-auto">
+                            @guest
+                                <div class="d-flex align-items-center">
+                                    <li class="nav-item pr-2">
+                                        <a class="btn btn-light rounded-pill px-3 me-2 btn-lg" href="{{ route('login') }}">
+                                            {{ __('Login') }}
+                                        </a>
+                                    </li>
+                                    @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="btn btn-light rounded-pill me-3 btn-lg" href="{{ route('register') }}">
+                                            {{ __('Register') }}
+                                        </a>
+                                    </li>
+                                    @endif
+                                </div>
+                            @else
+                                <div class="d-flex align-items-center">
+                                    
+                                    <!-- カート -->
+                                    <li class="nav-item px-4 pt-3">
+                                        <a class="nav-link btn-default" href="/cartindex">
+                                            <i class="fas fa-shopping-cart fa-2x"></i>
+                                            @if(session('cartData'))
+                                                <span class="badge badge-primary rounded-pill badge-dot badge-notify">
+                                                    {{ count(session('cartData')) }}
+                                                </span>
+                                            @endif
+                                            <p>カート</p>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item px-4 pt-3">
+                                        <a class="nav-link btn-default text-center" href="/user/index">
+                                            <i class="fas fa-user fa-2x"></i>
+                                            <p>マイページ</p>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item pl-3">
+                                        <a class="btn btn-light rounded-pill pl-3" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('ログアウト') }}
+                                        </a>
+                                        
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </div>
+                            @endguest
+                        </ul>
+                    </div>
                 </div>
             </div>
         </header>
