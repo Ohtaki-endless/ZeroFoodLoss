@@ -37,6 +37,7 @@
                             <img class="mx-auto d-block" src="{{ $post->image_path }}" width="280" height="280">
                             
                             <!--いいねボタン-->
+                            
                             <!--<div class="card-body mx-auto">-->
                             <!--    @if($post->users()->where('user_id', Auth::id())->exists())-->
                             <!--    	<a href="/posts/{{ $post->id }}/unlikes" class="btn btn-danger btn-sm rounded-pill">-->
@@ -60,12 +61,12 @@
                             <!--        </a>-->
                             <!--    @endcan-->
                             <!--</div>-->
-                            <!--いいねボタン終-->
                             
                             <!--いいねボタンVue.js-->
                             <div class="card-body mx-auto">
                                 <like-component :post="{{ json_encode($post)}}"></like-component>
                             </div>
+                            <!--いいねボタン終-->
                             
                         </div>
                         
@@ -114,7 +115,9 @@
                                     <input type="submit" value="カートに追加" class="btn btn-primary rounded-pill">
                                 </form>
                             </div>
+                            <!--販売中の表示終-->
                             
+                            <!--購入期限タイマーがゼロになったら表示-->
                             <div id="sold-out">
                                 <h4 class="card-text">
                                     <span class="text-white badge rounded-pill bg-secondary">
@@ -126,7 +129,6 @@
                                     こちらの商品は、購入期限切れとなりました。
                                 </p>
                             </div>
-                            <!--販売中の表示終-->
                             
                             @else
                             
@@ -174,7 +176,8 @@
             </div>
         </div>
         <!--コメント投稿フォーム終-->
-            
+        
+        
         <!--コメント表示-->
         <div class="col-md-8">
             @foreach ($post->comments as $comment)

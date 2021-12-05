@@ -16,14 +16,15 @@
                 <div class="card-body mx-auto">
                     @foreach ($user->likes as $like)
                     <div class="pb-4">
-                        <div class="card">
+                        <div class="card position-relative">
                             <div class="card-body">
                                 <div class="row">
+                                    
                                     <div class="col-lg-6">
                                         <img class="mx-auto d-block" src="{{ $like->image_path }}" width="150" height="150">
                                     </div>
                                     
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 position-static">
                                         <h5 class='card-title pt-1'>
                                             <a class="stretched-link" href="/posts/{{ $like->id }}">{{ $like->title }}</a>
                                         </h5>

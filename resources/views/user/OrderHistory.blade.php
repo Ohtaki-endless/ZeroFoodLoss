@@ -17,6 +17,8 @@
                     @foreach ($user->orders as $order)
                     <div class="pb-4">
                         <div class="card">
+                            
+                            <!--予約番号等の表示-->
                             <h5 class="card-header">
                                 予約受付日：{{ $order->order_date }}
                             </h5>
@@ -29,6 +31,7 @@
                                 </h5>
                             </div>
                             
+                            <!--予約商品の表示-->
                             @foreach ($order->orderdetails as $orderdetail)
                                 <div class="card-body row pt-2 pb-2">
                                     <div class="col-xs-4 pl-2">
@@ -47,6 +50,7 @@
                                     </div>
                                 </div>
                             @endforeach
+                            
                         </div>
                     </div>
                     @endforeach
