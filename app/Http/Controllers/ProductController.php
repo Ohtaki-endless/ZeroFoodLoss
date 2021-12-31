@@ -36,36 +36,9 @@ class ProductController extends Controller
             $post->where('id', $cartData['session_products_id'])->update(['role' => 10]);
         }
         
-        //sessionにcartData配列が「ない」場合$cartDataをsessionに追加（カート内が空なら商品を追加する）
-        if (!$request->session()->has('cartData')) {
-            $request->session()->push('cartData', $cartData);
-            
-        } else {
-            // カート内に商品が「ある」場合の処理
-            //sessionにcartData配列が「ある」場合、情報取得
-            $sessionCartData = $request->session()->get('cartData');
-            
-            //product_id同一確認のフラグを指定（「false」は同一ではない状態）
-            $isSameProductId = false;
-            
-            foreach ($sessionCartData as $index => $sessionData) {
-                //product_idが同一であれば、フラグをtrueにする → 個数の合算処理、セッション情報更新。更新は一度のみ
-                //（カートには商品があり、かつ追加しようとしている商品のIDがカート内商品と同じ場合の処理）
-                if ($sessionData['session_products_id'] === $cartData['session_products_id'] ) {
-                    $isSameProductId = true;
-                    $quantity = $sessionData['session_quantity'] + $cartData['session_quantity'];
-                    //cartDataをrootとしたツリー状の多次元連想配列の特定のValueにアクセスし、指定の変数でValueの上書き処理
-                    $request->session()->put('cartData.' . $index . '.session_quantity', $quantity);
-                    break;
-                }
-            }
-            //product_idが同一ではない場合、pushする
-            //（カートには商品があり、かつ追加しようとしている商品のIDがカート内商品と異なる場合の処理）
-            if ($isSameProductId === false) {
-                $request->session()->push('cartData', $cartData);
-            }
-        }
-        $request->session()->put('users_id', ($request->users_id));
+        // カートへの商品追加処理
+        $post->AddCart($cartData, $request);
+        
         // フラッシュメッセージの追加
         session()->flash('flash_message', 'カートに商品を追加しました！');
         return redirect('/cartindex');
@@ -99,29 +72,14 @@ class ProductController extends Controller
     
     
     // カート商品削除
-    public function remove(Request $request)
+    public function remove(Request $request, Post $post)
     {
-        $sessionCartData = $request->session()->get('cartData');
-
-        // 削除する商品IDの値を数値変換
-        $id = (int)$request->product_id;
-
-        foreach ($sessionCartData as $index => $sessionData) {
-            if ($sessionData['session_products_id'] === $id ){
-                // DBの商品個数更新
-                $post = Post::find($sessionData['session_products_id']);
-                $quantity_result = $post->quantity + $sessionData['session_quantity'];
-                $post->where('id', $sessionData['session_products_id'])->update(['quantity' => $quantity_result]);
-                // ロールの更新
-                $post->where('id', $sessionData['session_products_id'])->update(['role' => 1]);
-                
-                // 該当商品のセッション情報削除
-                $request->session()->forget('cartData.' . $index);
-                break;
-            }
-        }
+        // カート商品削除処理
+        $post->RemoveCart($request);
+        
         // session再取得
         $cartData = $request->session()->get('cartData');
+        
         // フラッシュメッセージの追加
         session()->flash('flash_message', 'カートから商品を削除しました！');
         
@@ -136,42 +94,19 @@ class ProductController extends Controller
     
     
     // 購入予約確定
-    public function store(Request $request , OrderDetail $orderdetail , Order $order)
+    public function store(Request $request, Order $order)
     {
-        $cartData = $request->session()->get('cartData');
-        $now = Carbon::now();
+        // 予約処理
+        $order = $order->CartStore($request);
         
-        $order = new \App\Order;
-        $order->user_id = Auth::user()->id;
-        $order->total_price = $request->total_price;
-        $order->order_date = $now;
-        $order->order_number = rand();
-        //認証済みのユーザーのみオブジェクトへ保存
-        Auth::user()->orders()->save($order);
-
-        //Qrderテーブルの カラム「order_number」が「$order->order_number」の値を取得
-        $savedOrder = Order::where('order_number', $order->order_number)->get();
-        //上記Collectionから id の値だけを取得した配列に変換
-        $savedOrderId = $savedOrder->pluck('id')->toArray();
-
-        //注文詳細情報保存を注文数分繰り返す １回のリクエストを複数カラムに分けDB登録
-        foreach ($cartData as $data) {
-            //注文詳細情報に関わるオブジェクト生成
-            $orderDetail = new \App\OrderDetail;
-            $orderDetail->product_id = $data['session_products_id'];
-            $orderDetail->order_id = $savedOrderId[0];
-            $orderDetail->order_quantity = $data['session_quantity'];
-            $orderDetail->save();
-        }
-
         //session削除
         $request->session()->forget('cartData');
 
         // メール送信処理
         $order->load('orderdetails.post');
         $user = Auth::user();
-        $mail_data['user']=$user->name;
-        $mail_data['order']=$order;
+        $mail_data['user'] = $user->name;
+        $mail_data['order'] = $order;
         Mail::to($user->email)->send(new Thanks($mail_data));
         Mail::to(config('mail.username'))->send(new Thanks($mail_data));
         
